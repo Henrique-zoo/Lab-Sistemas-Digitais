@@ -1,7 +1,7 @@
 -- Universidade de Brasília (UnB)
--- Laboratório de Sistemas Digitais
+-- Laboratório de Sistemas Digitais - Turma 07
 -- Autor: Henrique Morcelles Salum
--- Data: 21/10/2024
+-- Data: --/04/2025
 -- Relatório 2 - questão 1
 
 -- *************************************************
@@ -17,27 +17,25 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
+-- A entidade do testbench é vazia pois ele nunca será instanciado
 entity tb_somadorCompleto is
 end tb_somadorCompleto;
 
 architecture main of tb_somadorCompleto is
-    -- Declaração do componente "somadorCompleto"
+    -- Declaração do componente "somadorCompleto". Pense num componente como uma classe
     component somadorCompleto is
         port (
             A, B, Cin : in std_logic;
             S, Cout : out std_logic
         );
     end component somadorCompleto;
-
-    -- Declaração dos sinais internos do testbench
-    signal A_tb : std_logic := '0';
+    
+    signal A_tb : std_logic := '0'; -- Sinais internos do testbench
     signal B_tb : std_logic := '0';
     signal Cin_tb : std_logic := '0';
-
 begin
-    -- Instância do componente somadorCompleto
-    instancia_somador : component somadorCompleto
-        -- No port map, associamos os sinais internos do testbench com as portas do componente testado
+    -- Inicialização da instância do componente - como se fosse um objeto
+    instancia_somador : component somadorCompleto 
         port map (
             A => A_tb,
             B => B_tb,
@@ -45,23 +43,20 @@ begin
             S => open,
             Cout => open
         );
-
-
-    combinacoes : process
-        variable i : integer := 1;
+    -- Processo para variar as entradas
+    estimulos : process
+        variable i : integer := 0;
     begin
-        if (i mod 2) = 0 then
-            A_tb <= not A_tb;
-        end if;
-        if (i mod 4) = 0 then
-            B_tb <= not B_tb;
-        end if;
-        if (i mod 8) = 0 then
-            Cin_tb <= not Cin_tb;
+        if i /= 0 then
+            if i mod 2 = 0 then Cin_tb <= not Cin_tb;
+            end if;
+            if i mod 4 = 0 then B_tb <= not B_tb;
+            end if;
+            if i mod 8 = 0 then A_tb <= not A_tb;
+            end if;
         end if;
 
         i := i + 1;
-        wait for 5 ns;
-    end process combinacoes;
-    
+        wait for 6.25 ns;
+    end process estimulos;
 end architecture main;

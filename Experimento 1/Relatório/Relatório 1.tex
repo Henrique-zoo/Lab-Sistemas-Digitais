@@ -6,6 +6,7 @@
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage[table]{xcolor} % Para colorir as linhas da tabela
 \usepackage{array}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage{geometry}
@@ -60,9 +61,11 @@
 % Configurações de cabeçalho e rodapé
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\footnotesize{Laboratório de Sistemas Digitais - 2025/1 - Turma 07}}
+\fancyhead[L]{\footnotesize{Laboratório de Sistemas Digitais - ENE0040}}
+\fancyhead[R]{\footnotesize{2025/1 - Turma 07}}
 \fancyfoot[R]{\footnotesize{Página \ \thepage \ de \pageref{LastPage}}}
 \fancyfoot[L]{\footnotesize{Relatório do Experimento 1}}
+
 % Adiciona uma linha preta acima do rodapé
 \renewcommand{\footrulewidth}{0.4pt} % Espessura da linha
 \renewcommand{\footrule}{\vbox to 0pt{\hrule width \textwidth height \footrulewidth \vss}} % Desenha a linha
@@ -100,10 +103,13 @@ As portas lógicas AND, OR e NOT implementam, respectivamente, as funções bool
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
-        $A$ & $B$ & $A \land B$ \\ \hline
+        \rowcolor{black}
+        \textcolor{white}{$A$} & \textcolor{white}{$B$} & \textcolor{white}{$A \land B$} \\ \hline
         0 & 0 & 0 \\ \hline
+        \rowcolor{lightgray}
         0 & 1 & 0 \\ \hline
         1 & 0 & 0 \\ \hline
+        \rowcolor{lightgray}
         1 & 1 & 1 \\ \hline
     \end{tabular}
     \caption{Tabela-verdade da função booleana AND}
@@ -113,10 +119,13 @@ As portas lógicas AND, OR e NOT implementam, respectivamente, as funções bool
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
-        $A$ & $B$ & $A \lor B$ \\ \hline
+        \rowcolor{black}
+        \textcolor{white}{$A$} & \textcolor{white}{$B$} & \textcolor{white}{$A \lor B$} \\ \hline
         0 & 0 & 0 \\ \hline
+        \rowcolor{lightgray}
         0 & 1 & 1 \\ \hline
         1 & 0 & 1 \\ \hline
+        \rowcolor{lightgray}
         1 & 1 & 1 \\ \hline
     \end{tabular}
     \caption{Tabela-verdade da função booleana OR}
@@ -126,8 +135,10 @@ As portas lógicas AND, OR e NOT implementam, respectivamente, as funções bool
     \centering
     \begin{tabular}{|c|c|}
         \hline
-        $A$ & $\neg A$ \\ \hline
+        \rowcolor{black}
+        \textcolor{white}{$A$} & \textcolor{white}{$\neg A$} \\ \hline
         0 & 1 \\ \hline
+        \rowcolor{lightgray}
         1 & 0 \\ \hline
     \end{tabular}
     \caption{Tabela-verdade da função booleana NOT}
@@ -149,12 +160,11 @@ Do Primeiro Teorema de De Morgan obtemos o seguinte resultado:
 \[
 A \land B = \lnot (\lnot A \lor \lnot B),
 \]
-
-\noindent ou seja, o AND entre dois bits é o mesmo que o inverso (NOT) do OR entre os inversos desses bits. A implementação desse circuito no Logisim é como segue:
+ou seja, o AND entre dois bits é o mesmo que o inverso (NOT) do OR entre os inversos desses bits. A implementação desse circuito no Logisim é como segue:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{Imagens/circ1a.png}
+    \includegraphics[width=0.3\textwidth]{Imagens/circ1a.png}
     \caption{AND implementado apenas com OR e NOT}
 \end{figure}
 
@@ -186,7 +196,7 @@ A \lor B = \lnot (\lnot A \land \lnot B),
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{Imagens/circ1b.png}
+    \includegraphics[width=0.3\textwidth]{Imagens/circ1b.png}
     \caption{OR implementado apenas com AND e NOT}
 \end{figure}
 
@@ -208,15 +218,21 @@ As saídas do somador completo, $T$ e $S$, podem ser implementadas, respectivame
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \multicolumn{3}{|c|}{\textbf{Entradas}} & \multicolumn{2}{c|}{\textbf{Saídas}} \\ \hline
-        $A$ & $B$ & $C$ & $T$ & $S$ \\ \hline
+        \rowcolor{black}
+        \multicolumn{3}{|c|}{\textbf{\textcolor{white}{Entradas}}} & \multicolumn{2}{|c|}{\textbf{\textcolor{white}{Saídas}}} \\ \hline
+        \rowcolor{black}
+        \textcolor{white}{$A$} & \textcolor{white}{$B$} & \textcolor{white}{$C$} & \textcolor{white}{$T$} & \textcolor{white}{$S$} \\ \hline
         0 & 0 & 0 & 0 & 0 \\ \hline
+        \rowcolor{lightgray}
         0 & 0 & 1 & 0 & 1 \\ \hline
         0 & 1 & 0 & 0 & 1 \\ \hline
+        \rowcolor{lightgray}
         0 & 1 & 1 & 1 & 0 \\ \hline
         1 & 0 & 0 & 0 & 1 \\ \hline
+        \rowcolor{lightgray}
         1 & 0 & 1 & 1 & 0 \\ \hline
         1 & 1 & 0 & 1 & 0 \\ \hline
+        \rowcolor{lightgray}
         1 & 1 & 1 & 1 & 1 \\ \hline
     \end{tabular}
     \caption{Tabela-verdade das funções $T$ e $S$}
@@ -292,11 +308,11 @@ Para saber como implementar a função $T$ apenas com portas NAND, utilizaremos 
 \[
 T = AB + AC + BC = \overline{\overline{AB} \cdot \ \overline{AC} \cdot \ \overline{BC}},
 \]
-ou seja, $T$ é igual ao NAND entre os NANDs de $A$ e $B$, $A$ e $C$, $B$ e $C$. Precisamos somente aplicar essa lógica no Logisim e montamos o circuito abaixo.
+ou seja, $T$ é igual ao NAND entre os NANDs de $A$ e $B$, $A$ e $C$, $B$ e $C$. Precisamos somente aplicar essa lógica no Logisim e conseguimos montar o circuito abaixo.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Imagens/circ3a.png}
+    \includegraphics[width=0.5\textwidth]{Imagens/circ3a.png}
     \caption{Função $T$ implementada apenas com NANDs}
 \end{figure}
 
@@ -349,10 +365,13 @@ A tabela-verdade desse dispositivo é a que segue.
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
-        $S_1$ & $S_0$ & $Y$ \\ \hline
+        \rowcolor{black}
+        \textcolor{white}{$S_1$} & \textcolor{white}{$S_0$} & \textcolor{white}{$Y$} \\ \hline
         0 & 0 & $D_0$ \\ \hline
+        \rowcolor{lightgray}
         0 & 1 & $D_1$ \\ \hline
         1 & 0 & $D_2$ \\ \hline
+        \rowcolor{lightgray}
         1 & 1 & $D_3$ \\ \hline
     \end{tabular}
     \caption{Tabela-verdade multiplexador 4x1}
