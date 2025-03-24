@@ -19,14 +19,14 @@ use IEEE.std_logic_1164.all;
 -- Criação da Entidade
 entity Mux4x1 is
     port (
-        D : in std_logic_vector(3 downto 0); -- Entradas de dados
-        S : in std_logic_vector(1 downto 0); -- Entradas de seleção
-        Y : out std_logic -- Saída
+        D: in std_logic_vector(3 downto 0); -- Entradas de dados
+        S: in std_logic_vector(1 downto 0); -- Entradas de seleção
+        Y: out std_logic -- Saída
     );
 end entity Mux4x1;
 
 -- Criação da Arquitetura
-architecture main of Mux4x1 is
+architecture behavioral of Mux4x1 is
 begin
     -- Lógica da saída definida em função das entradas de seleção
     Y <= D(3) when (S = "11") else
@@ -34,4 +34,4 @@ begin
          D(1) when (S = "01") else
          D(0) when (S = "00") else
          '-';
-end architecture main;
+end architecture behavioral;

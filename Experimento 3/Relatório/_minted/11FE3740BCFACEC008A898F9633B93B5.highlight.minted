@@ -1,0 +1,33 @@
+\begin{MintedVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{k}{library}\PYG{+w}{ }\PYG{n+nn}{IEEE}\PYG{p}{;}
+\PYG{k}{use}\PYG{+w}{ }\PYG{n+nn}{IEEE.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity}\PYG{+w}{ }\PYG{n+nc}{Dec4x16}\PYG{+w}{ }\PYG{k}{is}
+\PYG{+w}{    }\PYG{k}{port}\PYG{+w}{ }\PYG{p}{(}
+\PYG{+w}{        }\PYG{n}{A}\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{Y}\PYG{o}{:}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{15}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{)}\PYG{p}{;}
+\PYG{k}{end}\PYG{+w}{ }\PYG{k}{entity}\PYG{+w}{ }\PYG{n+nc}{Dec4x16}\PYG{p}{;}
+
+\PYG{k}{architecture}\PYG{+w}{ }\PYG{n+nc}{behavioral}\PYG{+w}{ }\PYG{k}{of}\PYG{+w}{ }\PYG{n+nc}{Dec4x16}\PYG{+w}{ }\PYG{k}{is}
+\PYG{k}{begin}
+\PYG{+w}{    }\PYG{k}{with}\PYG{+w}{ }\PYG{n}{A}\PYG{+w}{ }\PYG{k}{select}\PYG{+w}{ }\PYG{n}{Y}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{o}{=}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0001"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"0"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0002"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"1"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0004"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"2"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0008"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"3"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0010"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"4"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0020"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"5"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0040"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"6"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0080"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"7"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0100"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"8"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0200"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"9"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0400"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"A"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"0800"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"B"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"1000"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"C"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"2000"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"D"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"4000"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"E"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{esc}{\hex{X"8000"}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{esc}{\hex{X"F"}}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+s}{\PYGZdq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZdq{}}\PYG{+w}{ }\PYG{k}{when}\PYG{+w}{ }\PYG{k}{others}\PYG{p}{;}
+\PYG{k}{end}\PYG{+w}{ }\PYG{k}{architecture}\PYG{+w}{ }\PYG{n+nc}{behavioral}\PYG{p}{;}
+\end{MintedVerbatim}

@@ -107,9 +107,9 @@ C_{out} = A \cdot B + A \cdot C_{in} + B \cdot C_{in}
 
 \subsubsection{Multiplexador 4 para 1}
 \paragraph{}
-Na segunda tarefa, deve-se implementar um multiplexador de 4 para 1, utilizando dois vetores de entrada: $S$, de dois sinais e $D$, de quatro sinais. A saída é um sinal $Y$ definido como segue:
+Na segunda tarefa, deve-se implementar um multiplexador de 4 para 1, utilizando dois vetores de entrada: $S$, de dois sinais e $D$, de quatro sinais. A saída é um sinal $Y$ definido da seguinte forma:
 \[
-Y = D_3 \cdot \overline{S_1} \cdot \overline{S_0} + D_2 \cdot \overline{S_1} \cdot S_0 + D_1 \cdot S_1 \cdot \overline{S_0} + D_0 \cdot S_1 \cdot S_0
+Y = D_0 \cdot \overline{S_1} \cdot \overline{S_0} + D_1 \cdot \overline{S_1} \cdot S_0 + D_2 \cdot S_1 \cdot \overline{S_0} + D_3 \cdot S_1 \cdot S_0
 \]
 
 \subsection{Introdução Teórica}
@@ -120,29 +120,31 @@ Antes de definir o somador completo (\textit{Full Adder}), vamos definir o meio 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.35\textwidth]{Imagens/Meio Somador.png}
-    \caption{Representação externa do Meio Somador}
+    \includegraphics[width=0.3\textwidth]{Imagens/Meio Somador.png}
+    \caption{Representação externa do meio somador}
 \end{figure}
 
 \paragraph{}
-Esse somador, porém, só consegue somar números de um bit. O que fazer, então, se quisermos somar números grandes de vários bits? Para cada posição das representações binárias das entradas, precisamos de um somador para realizar, além da soma entre o bit dessa posição de cada entrada, a soma com o \textit{vai um} da casa anterior - chamaremos de $C_{in}$. O somador que cumpre esses requisitos é chamado Somador Completo.
+Esse somador, porém, só consegue somar números de um bit. O que fazer, então, se quisermos somar números grandes de vários bits? Para cada posição das representações binárias das entradas, precisamos de um somador para realizar, além da soma entre o bit dessa posição de cada entrada, a soma com o \textit{vai um} da casa anterior - chamaremos de $C_{in}$. O somador que cumpre esses requisitos é chamado somador completo.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.35\textwidth]{./Imagens/SomadorCompleto.png}
-    \caption{Representação externa do Somador Completo}
+    \includegraphics[width=0.35\textwidth]{Imagens/SomadorCompleto.png}
+    \caption{Representação externa do somador completo}
     \label{fig:somador_externa}
 \end{figure}
 
 \paragraph{}
-Note que a representação acima abstrai a lógica que relaciona as saídas do somador às suas entradas. Podemos representar o Somador Completo pela sua representação interna, que explicita a relação entre entradas e saídas. Essa representação consiste na tradução das equações mostradas na seção ``\textbf{Sobre o Experimento}'' para um esquemático, construído em Logisim.
+Note que a representação acima abstrai a lógica que relaciona as saídas do somador às suas entradas. Podemos representar o somador completo pela sua representação interna, que explicita a relação entre entradas e saídas. Essa representação consiste na tradução das equações mostradas na seção ``\textbf{Sobre o Experimento}'' para um esquemático, construído em Logisim.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{Imagens/SomadorCompletoInterno.png}
-    \caption{Representação interna do Somador Completo}
+    \includegraphics[width=1\linewidth]{Imagens/SomadorCompletoInterno.png}
+    \caption{Representação interna do somador completo}
     \label{fig:somador_interna}
 \end{figure}
+
+\newpage
 
 \paragraph{}
 Para realizar a soma de números grandes, basta encasquetarmos somadores completos. O número de somadores necessários é o número de casas das entradas e a entrada $C_{in}$ de cada somador é a saída $C_{out}$ do somador da posição anterior, com exceção da primeira casa, que tem como entrada $C_{in} = 0$. A tabela-verdade do somador completo é a que segue:
@@ -156,29 +158,29 @@ Para realizar a soma de números grandes, basta encasquetarmos somadores complet
         \rowcolor{black}
         \textcolor{white}{$A$} & \textcolor{white}{$B$} & \textcolor{white}{$C_{in}$} & \textcolor{white}{$C_{out}$} & \textcolor{white}{$S$} \\ \hline
         0 & 0 & 0 & 0 & 0 \\ \hline
-        \rowcolor{lightgray}
+        \rowcolor{cinza}
         0 & 0 & 1 & 0 & 1 \\ \hline
         0 & 1 & 0 & 0 & 1 \\ \hline
-        \rowcolor{lightgray}
+        \rowcolor{cinza}
         0 & 1 & 1 & 1 & 0 \\ \hline
         1 & 0 & 0 & 0 & 1 \\ \hline
-        \rowcolor{lightgray}
+        \rowcolor{cinza}
         1 & 0 & 1 & 1 & 0 \\ \hline
         1 & 1 & 0 & 1 & 0 \\ \hline
-        \rowcolor{lightgray}
+        \rowcolor{cinza}
         1 & 1 & 1 & 1 & 1 \\ \hline
     \end{tabular}
-    \caption{Tabela-verdade do Somador Completo}
+    \caption{Tabela-verdade do somador completo}
 \end{table}
 
 \subsubsection{Multiplexador 4 para 1}
 \paragraph{}
-Um multiplexador, também chamado de Mux, é um dispositivo digital que seleciona uma entre várias entradas de dados como saída. Essencialmente, o multiplexador atua como um ``comutador'' controlado por entradas de seleção, determinando qual sinal será encaminhado para a saída. Esse dispositivo é extensivamente usado no projeto de máquinas de estados, pois ele é muito conveniente quando é necessário implementar diferentes lógicas a depender do estado atual.
+Um multiplexador, também chamado de Mux, é um dispositivo digital que seleciona uma entre várias entradas de dados como saída. Essencialmente, o multiplexador atua como um ``comutador'' controlado por entradas de seleção, determinando qual sinal será encaminhado para a saída. Esse dispositivo é extensivamente usado no projeto de máquinas de estados, pois ele é muito conveniente quando é necessário implementar diferentes lógicas dependendo do estado atual.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/multiplexador.png}
-    \caption{Representação externa do Multiplexador 4 x 1}
+    \includegraphics[width=0.35\textwidth]{Imagens/multiplexador.png}
+    \caption{Representação externa do multiplexador 4 x 1}
     \label{fig:Mux_externa}
 \end{figure}
 
@@ -194,13 +196,13 @@ Nesse experimento, implementamos, especificamente, um multiplexador 4 para 1, ou
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{Imagens/MultiplexadorInterno.png}
-    \caption{Representação interna do Multiplexador 4x1}
+    \includegraphics[width=1\linewidth]{Imagens/MultiplexadorInterno.png}
+    \caption{Representação interna do multiplexador 4x1}
     \label{fig:Mux_interna}
 \end{figure}
 
 \paragraph{}
- A tabela-verdade do Mux 4x1 é a que segue:
+A tabela-verdade do Mux 4x1, na qual introduzimos a entrada de dados selecionada na saída, ao invés de fazer a tabela para cada variação dessa entrada, é a que segue:
 
 \begin{table}[H]
     \centering
@@ -208,27 +210,29 @@ Nesse experimento, implementamos, especificamente, um multiplexador 4 para 1, ou
         \hline
         \rowcolor{black}
         \textcolor{white}{$S_1$} & \textcolor{white}{$S_0$} & \textcolor{white}{Saída} \\ \hline
-        0 & 0 & $D_3$ \\ \hline
-        \rowcolor{lightgray}
-        0 & 1 & $D_2$ \\ \hline
-        1 & 0 & $D_1$ \\ \hline
-        \rowcolor{lightgray}
-        1 & 1 & $D_0$ \\ \hline
+        0 & 0 & $D_0$ \\ \hline
+        \rowcolor{cinza}
+        0 & 1 & $D_1$ \\ \hline
+        1 & 0 & $D_2$ \\ \hline
+        \rowcolor{cinza}
+        1 & 1 & $D_3$ \\ \hline
     \end{tabular}
-    \caption{Tabela-verdade do Multiplexador 4x1}
+    \caption{Tabela-verdade do multiplexador 4x1}
 \end{table}
+
+\newpage
 
 \section{Códigos}
 \paragraph{}
-Nessa seção, serão apresentados os códigos desenvolvidos, em VHDL, para implementar os sistemas digitais apresentados na introdução. Os códigos referentes ao \textit{design} dos sistemas digitais são apresentados aqui com alguns comentários, os \textit{testbenches}, com bem menos. Os códigos enviados junto a esse relatório, porém, estão todos devidamente comentados - aqui, alguns comentários foram suprimidos para melhor apresentação.
+Nessa seção, serão apresentados os códigos desenvolvidos, em VHDL, para implementar os sistemas digitais apresentados na introdução. Os códigos referentes ao \textit{design} dos sistemas digitais são apresentados aqui com alguns comentários, os \textit{testbenches}, com bem menos. Os códigos enviados junto a este relatório, porém, estão todos devidamente comentados - aqui, alguns comentários foram suprimidos para melhor apresentação.
 
 \subsection{Somador Completo}
 \paragraph{}
-Para implementar o somador completo descrito anteriormente, foi necessário desenvolver o seu \textbf{arquivo de \textit{design} VHDL}, composto pela entidade (\textit{entity}), que estabelece a interface do dispositivo, e pela arquitetura (\textit{architecture}), que estabelece a sua lógica interna.
+Para implementar o somador completo descrito anteriormente, foi necessário desenvolver, em VHDL, o seu \textbf{arquivo de modelo de \textit{hardware}}, composto pela entidade (\textit{entity}), que estabelece a interface do dispositivo, e pela arquitetura (\textit{architecture}), que estabelece a sua lógica interna.
 
-\subsubsection{Arquivo de Design VHDL}
+\subsubsection{Descrição de Hardware}
 \paragraph{}
-O código escrito para implementar o arquivo de design do Somador Completo é o que segue:
+O código escrito no arquivo de \textit{design} do somador completo é o que segue:
 
 \begin{code}
 \begin{minted}{VHDL}
@@ -238,17 +242,17 @@ use IEEE.std_logic_1164.all;
 -- Criação da entidade, que declara entradas e saídas do sistema
 entity somadorCompleto is
     port (
-        A, B, Cin : in std_logic; -- Entradas
-        S, Cout : out std_logic -- Saídas
+        A, B, Cin: in std_logic; -- Entradas
+        S, Cout: out std_logic -- Saídas
     );
 end somadorCompleto;
 
 -- Criação da arquitetura, que estabelece a lógica entre as entradas e saídas
-architecture main of somadorCompleto is
+architecture behavioral of somadorCompleto is
 begin
     S <= A xor B xor Cin; -- Lógica da saída S
     Cout <= (A and B) or (A and Cin) or (B and Cin); -- Lógica da saída Cout
-end architecture main;
+end architecture behavioral;
 \end{minted}
 \caption{Código para implementação do somador completo}
 \end{code}
@@ -269,18 +273,18 @@ use IEEE.std_logic_1164.all;
 entity tb_somadorCompleto is
 end tb_somadorCompleto;
 
-architecture main of tb_somadorCompleto is
+architecture testbench of tb_somadorCompleto is
     -- Declaração do componente "somadorCompleto". Pense num componente como uma classe
     component somadorCompleto is
         port (
-            A, B, Cin : in std_logic;
-            S, Cout : out std_logic
+            A, B, Cin: in std_logic;
+            S, Cout: out std_logic
         );
     end component somadorCompleto;
     -- Sinais internos do testbench
-    signal A_tb : std_logic := '0';
-    signal B_tb : std_logic := '0';
-    signal Cin_tb : std_logic := '0';
+    signal A_tb: std_logic := '0';
+    signal B_tb: std_logic := '0';
+    signal Cin_tb: std_logic := '0';
 begin
     -- Inicialização da instância do componente - como se fosse um objeto
     instancia_somador : component somadorCompleto 
@@ -292,8 +296,8 @@ begin
             Cout => open
         );
     -- Processo para variar as entradas
-    estimulos : process
-        variable i : integer := 0;
+    estimulos: process
+        variable i: integer := 0;
     begin
         if i /= 0 then
             if i mod 2 = 0 then Cin_tb <= not Cin_tb;
@@ -307,21 +311,21 @@ begin
         i := i + 1;
         wait for 6.25 ns;
     end process estimulos;
-end architecture main;
+end architecture testbench;
 \end{minted}
 \caption{Testbench para o somador completo}
 \end{code}
 
 \paragraph{}
-No código acima, o Somador Completo construído é instanciado e utilizado como uma ``caixa-preta''; associamos às suas entradas sinais do \textit{testbench}, o que é equivalente a conectar cabos nas entradas de um dispositivo digital, e, dentro do \textit{process}, fazemos esses sinais oscilarem. Dessa forma, conseguimos testar o dispositivo criado.
+No código acima, o somador completo construído é instanciado e utilizado como uma ``caixa-preta''; associamos às suas entradas sinais do \textit{testbench}, o que é equivalente a conectar cabos nas entradas de um dispositivo digital, e, dentro do \textit{process}, fazemos esses sinais oscilarem. Dessa forma, conseguimos testar o dispositivo criado.
 
 \subsection{Multiplexador 4 para 1}
 \paragraph{}
 Como pôde ser visto, nos códigos relativos ao somador completo, a abordagem foi bastante de baixo nível: não utilizamos abstrações fornecidas pela linguagem VHDL, a função foi implementada diretamente pela equação correspondente e o \textit{testbench} gerou todas as oito possíveis combinações das três entradas. A abordagem para o multiplexador foi diferente, como será observado nos códigos subsequentes.
 
-\subsubsection{Arquivo de Design VHDL}
+\subsubsection{Descrição de Hardware}
 \paragraph{}
-O código formulado para implementar o Multiplexador 4 para 1 é o que segue:
+O código desenvolvido em VHDL para implementar a ``caixa-preta'' do multiplexador 4 para 1 é o que segue:
 
 \begin{code}
 \begin{minted}{VHDL}
@@ -330,33 +334,33 @@ use IEEE.std_logic_1164.all;
 
 entity Mux4x1 is
     port (
-        D : in std_logic_vector(3 downto 0); -- Entradas de dados
-        S : in std_logic_vector(1 downto 0); -- Entradas de seleção
-        Y : out std_logic -- Saída
+        D: in std_logic_vector(3 downto 0); -- Entradas de dados
+        S: in std_logic_vector(1 downto 0); -- Entradas de seleção
+        Y: out std_logic -- Saída
     );
 end entity Mux4x1;
 
-architecture main of Mux4x1 is
+architecture behavioral of Mux4x1 is
 begin
     Y <= D(3) when (S = "11") else -- Lógica da saída
          D(2) when (S = "10") else -- definida em função
          D(1) when (S = "01") else -- das entradas de
          D(0) when (S = "00") else -- seleção
          '-'; -- don't care quando as entradas de seleção são don't cares, weak, alta impedância, etc.
-end architecture main;
+end architecture behavioral;
 \end{minted}
 \caption{Código para implementação do multiplexador 4x1}
 \end{code}
 
 \paragraph{}
-Aqui, ao invés de implementar a função pela equação correspondente, foi utilizada uma construção de controle de fluxo `if', em que apenas se definiu o comportamento do circuito para as combinações das entradas de seleção, além de se ter considerado apenas alguns valores - 0 e 1 - para elas, fazendo com que as outras possibilidades - X, Z, H, ... - gerassem saída \textit{don't care} (-). O \textit{testbench} do multiplexador é o que segue.
+Aqui, ao invés de implementar a função pela equação correspondente, foi utilizada uma construção de controle de fluxo `when', em que apenas se definiu o comportamento do circuito para as combinações das entradas de seleção, além de se ter considerado apenas alguns valores - 0 e 1 - para elas, fazendo com que as outras possibilidades - X, Z, H, ... - gerassem saída \textit{don't care} (-). O \textit{testbench} do multiplexador é o que segue.
 
 \paragraph{}
-Analogamente ao Somador Completo, no Multiplexador 4 para 1, a entidade é equivalente à representação da \autoref{fig:Mux_externa} e a arquitetura, à da \autoref{fig:Mux_interna}.
+Analogamente ao somador completo, no multiplexador 4 para 1, a entidade (\textit{entity}) é equivalente à representação da \autoref{fig:Mux_externa} e a arquitetura (\textit{architecture}), à da \autoref{fig:Mux_interna}.
 
 \subsubsection{Testbench}
 \paragraph{}
-O código referente ao \textit{testbench} do Multiplexador é o que segue:
+O código referente ao \textit{testbench} do multiplexador é o que segue:
 
 \begin{code}
 \begin{minted}{VHDL}
@@ -367,19 +371,19 @@ use IEEE.numeric_std.all;
 entity tb_Mux4x1 is
 end entity tb_Mux4x1;
 
-architecture main of tb_Mux4x1 is
+architecture testbench of tb_Mux4x1 is
     component Mux4x1 is
         port (
-            D : in std_logic_vector(3 downto 0);
-            S : in std_logic_vector(1 downto 0);
-            Y : out std_logic
+            D: in std_logic_vector(3 downto 0);
+            S: in std_logic_vector(1 downto 0);
+            Y: out std_logic
         );
     end component Mux4x1;
     
-    signal D_tb : std_logic_vector(3 downto 0) := (others => '1');
-    signal S_tb : std_logic_vector(1 downto 0) := (others => '0');
+    signal D_tb: std_logic_vector(3 downto 0) := (others => '1');
+    signal S_tb: std_logic_vector(1 downto 0) := (others => '0');
 begin
-    instancia_Mux4x1 : component Mux4x1
+    instancia_Mux4x1: component Mux4x1
         port map (
             D => D_tb,
             S => S_tb,
@@ -388,7 +392,7 @@ begin
 
     -- Processo para variar as entradas de seleção
     estimulos_seletoras: process
-        variable s_unsigned : unsigned(1 downto 0);
+        variable s_unsigned: unsigned(1 downto 0);
     begin
         wait for 25 ns;
         s_unsigned := unsigned(S_tb);
@@ -398,7 +402,7 @@ begin
     
     -- Processo para variar as entradas selecionadas
     variacao_dados: process
-        variable i : integer;
+        variable i: integer;
     begin
         wait for 12.5 ns;
         -- O índice do elemento do vetor D que é selecionado coincide com o valor do vetor S em inteiro
@@ -406,7 +410,7 @@ begin
         D_tb(i) <= not D_tb(i);
         wait on S_tb;
     end process variacao_dados;
-end architecture main;
+end architecture testbench;
 \end{minted}
 \caption{Testbench para o multiplexador 4x1}
 \end{code}
@@ -417,18 +421,13 @@ Ao contrário do \textit{testbench} anterior, aqui não são geradas todas as co
 % Compilação
 \section{Compilação}
 \paragraph{}
-Após escrever os códigos, é necessário compilá-los pelo ModelSim para que se possa simular os sistemas digitais discutidos. Caso a compilação tenha sucesso, sabemos que não houve erros nos códigos apresentados, mas ainda não podemos afirmar que a lógica para implementar os circuitos está correta, isso será analisado nas próximas seções.
-
-\paragraph{}
-A seguir, está a mensagem de compilação dos códigos apresentados acima, sem nenhum erro, como pode ser visto no terminal no canto inferior da figura.
+Após escrever os códigos, é necessário compilá-los pelo ModelSim para que se possa simular os sistemas digitais discutidos. Caso a compilação tenha sucesso, sabemos que não houve erros nos códigos apresentados, mas ainda não podemos afirmar que a lógica para implementar os circuitos está correta; isso será analisado nas próximas seções. A seguir, está a mensagem de compilação dos códigos apresentados acima, sem nenhum erro, como pode ser visto no terminal no canto inferior da figura.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Imagens/CompileModelSim.png}
+    \includegraphics[width=0.75\textwidth]{Imagens/CompileModelSim.png}
     \caption{Compilação de todos os códigos apresentados}
 \end{figure}
-
-\newpage
 
 \section{Simulação}
 \paragraph{}
@@ -436,7 +435,7 @@ Após compilar com sucesso os códigos apresentados, utilizamos o ModelSim para 
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}[colframe=darkgray, colback=white, boxrule=0.5pt, arc=2pt, width=0.95\textwidth, center, boxsep=0pt, left=0pt, right=0pt]
+    \begin{tcolorbox}[colframe=darkgray, colback=white, boxrule=0.5pt, arc=1pt, width=0.95\textwidth, center, boxsep=0pt, left=0pt, right=0pt]
     \includegraphics[width=1\textwidth]{Imagens/waves.png}
     \end{tcolorbox}
     \caption{Simulação em forma de onda binária do somador completo}
@@ -456,7 +455,7 @@ Após compilar com sucesso os códigos apresentados, utilizamos o ModelSim para 
 \paragraph{}
 Para analisar os resultados obtidos, basta olhar para os valores das ondas das entradas e saídas entre cada mudança dos sinais de entrada. Os cursores estão posicionados de forma que, ao selecionar cada um deles, vemos todas as possíveis combinações das entradas e saídas correspondentes na aba à esquerda da tela.
 
-\subsection{Análise do comportamento do Somador Completo}
+\subsection{Análise do Comportamento do Somador Completo}
 \paragraph{}
  Abaixo, exibimos os \textit{prints} que denotam o comportamento dos sinais de saída $S$ e $C_{out}$ para cada combinação dos sinais de entrada $A$, $B$ e $C_{in}$.
 
@@ -471,13 +470,13 @@ Para analisar os resultados obtidos, basta olhar para os valores das ondas das e
     \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb6.png}} \\
     \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb7.png}}
     \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb8.png}}
-    \caption{Todas as combinações possíveis de entradas e as saídas correspondentes do Somador Completo}
+    \caption{Todas as combinações possíveis de entradas e as saídas correspondentes do somador completo}
 \end{figure}
 
 \paragraph{}
 Percebe-se que o comportamento está de acordo com o esperado: a concatenação das saídas $C_{out}$ e $S$ corresponde à soma dos bits de entrada $A$, $B$ e $C_{in}$.
 
-\subsection{Análise do comportamento do Multiplexador 4 para 1}
+\subsection{Análise do Comportamento do Multiplexador 4 para 1}
 
 \paragraph{}
 Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ para cada combinação da entrada de seleção. Abaixo, estão exibidos os \textit{prints} que mostram o comportamento do circuito simulado pelo ModelSim para cada uma dessas combinações. Perceba que cada linha representa uma combinação das entradas de seleção e, portanto, uma entrada de dados selecionada, enquanto cada coluna representa um possível valor do sinal de entrada de dados selecionado.
@@ -503,7 +502,7 @@ Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ 
 \section{Conclusão}
 
 \paragraph{}
-Nesse experimento, simulou-se, com sucesso, dois dispositivos digitais de suma importância para a eletrônica digital: o Somador Completo e o Multiplexador 4 para 1. No relatório, percebeu-se o sucesso do experimento e pôde-se analisar devidamente os resultados obtidos pelas simulações, por meio das quais foi possível analisar minuciosamente esses dois circuitos e o seu comportamento para cada estímulo possível.
+Nesse experimento, simulou-se, com sucesso, dois dispositivos digitais de suma importância para a eletrônica digital: o somador completo e o multiplexador 4 para 1. No relatório, percebeu-se o sucesso do experimento e pôde-se analisar devidamente os resultados obtidos pelas simulações, por meio das quais foi possível analisar minuciosamente esses dois circuitos e o seu comportamento para cada estímulo possível.
 
 \paragraph{}
 Concluindo, não foram observadas discrepâncias entre o comportamento esperado e o observado, podendo-se concluir, portanto, o sucesso do experimento.

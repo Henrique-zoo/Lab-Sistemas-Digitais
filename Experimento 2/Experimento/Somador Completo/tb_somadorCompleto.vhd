@@ -21,21 +21,21 @@ use IEEE.std_logic_1164.all;
 entity tb_somadorCompleto is
 end tb_somadorCompleto;
 
-architecture main of tb_somadorCompleto is
+architecture testbench of tb_somadorCompleto is
     -- Declaração do componente "somadorCompleto". Pense num componente como uma classe
     component somadorCompleto is
         port (
-            A, B, Cin : in std_logic;
-            S, Cout : out std_logic
+            A, B, Cin: in std_logic;
+            S, Cout: out std_logic
         );
     end component somadorCompleto;
     
-    signal A_tb : std_logic := '0'; -- Sinais internos do testbench
-    signal B_tb : std_logic := '0';
-    signal Cin_tb : std_logic := '0';
+    signal A_tb: std_logic := '0'; -- Sinais internos do testbench
+    signal B_tb: std_logic := '0';
+    signal Cin_tb: std_logic := '0';
 begin
     -- Inicialização da instância do componente - como se fosse um objeto
-    instancia_somador : component somadorCompleto 
+    instancia_somador: component somadorCompleto 
         port map (
             A => A_tb,
             B => B_tb,
@@ -44,8 +44,8 @@ begin
             Cout => open
         );
     -- Processo para variar as entradas
-    estimulos : process
-        variable i : integer := 0;
+    estimulos: process
+        variable i: integer := 0;
     begin
         if i /= 0 then
             if i mod 2 = 0 then Cin_tb <= not Cin_tb;
@@ -59,4 +59,4 @@ begin
         i := i + 1;
         wait for 6.25 ns;
     end process estimulos;
-end architecture main;
+end architecture testbench;

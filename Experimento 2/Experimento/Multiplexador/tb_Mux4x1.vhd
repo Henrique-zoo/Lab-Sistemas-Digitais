@@ -19,21 +19,21 @@ entity tb_Mux4x1 is
 end entity tb_Mux4x1;
 
 -- Arquitetura do Testbench
-architecture main of tb_Mux4x1 is
+architecture testbench of tb_Mux4x1 is
     -- Definimos o componente Mux4x1, pense nele como uma classe (da POO)
     component Mux4x1 is
         port (
-            D : in std_logic_vector(3 downto 0);
-            S : in std_logic_vector(1 downto 0);
-            Y : out std_logic
+            D: in std_logic_vector(3 downto 0);
+            S: in std_logic_vector(1 downto 0);
+            Y: out std_logic
         );
     end component Mux4x1;
     -- Criação dos sinais internos do testbench
-    signal D_tb : std_logic_vector(3 downto 0) := (others => '1');
-    signal S_tb : std_logic_vector(1 downto 0) := (others => '0');
+    signal D_tb: std_logic_vector(3 downto 0) := (others => '1');
+    signal S_tb: std_logic_vector(1 downto 0) := (others => '0');
 begin
     -- Pense na instância do componente como um objeto 
-    instancia_Mux4x1 : component Mux4x1
+    instancia_Mux4x1: component Mux4x1
         port map (
             D => D_tb, -- Associamos os sinais do
             S => S_tb, -- Testbench às entradas do sistema
@@ -42,7 +42,7 @@ begin
 
     -- Processo para variar as entradas de seleção
     estimulos_seletoras: process
-        variable s_unsigned : unsigned(1 downto 0); -- Variável para armazenar S_tb como unsigned
+        variable s_unsigned: unsigned(1 downto 0); -- Variável para armazenar S_tb como unsigned
     begin
         wait for 25 ns;
         s_unsigned := unsigned(S_tb);
@@ -52,11 +52,11 @@ begin
     
     -- Processo para variar as entradas selecionadas
     variacao_dados: process
-        variable i : integer;
+        variable i: integer;
     begin
         wait for 12.5 ns;
         i := to_integer(unsigned(S_tb)); -- O índice do elemento do vetor D que é selecionado coincide com o valor do vetor S em inteiro
         D_tb(i) <= not D_tb(i);
         wait on S_tb;
     end process variacao_dados;
-end architecture main;
+end architecture testbench;
