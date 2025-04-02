@@ -22,7 +22,7 @@
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
 
 % Configurações de margens e espaçamento
-\geometry{a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm}
+\geometry{a4paper, left=2.5cm, right=2cm, top=2.5cm, bottom=1.75cm}
 \setlength{\parindent}{1.25cm}
 \onehalfspacing
 
@@ -43,6 +43,7 @@
 
 % Configurações do minted para VHDL
 \setminted[VHDL]{
+    fontsize=\footnotesize,
     style=vs,
     linenos=true,
     breaklines=true,
@@ -92,18 +93,18 @@
 \section{Introdução}
 
 \subsection{Sobre o Experimento}
+\label{subsec:sobre_o_experimento}
 \paragraph{}
 Este experimento é composto por duas tarefas, em ambas, deve-se implementar circuitos lógicos com VHDL e simulá-los por meio do software ModelSim, da Intel. As especificidades de cada tarefa serão exploradas a seguir.
 
 \subsubsection{Somador Completo}
 \paragraph{}
 Na primeira tarefa, implementa-se um somador completo. As funções booleanas dos sinais de saída $S$ e $C_{out}$ são definidas em função das entradas $A$, $B$ e $C_{in}$ como segue:
-\[
-S = A \oplus B \oplus C_{in}
-\]
-\[
-C_{out} = A \cdot B + A \cdot C_{in} + B \cdot C_{in}
-\]
+
+\begin{align*}
+S = A \oplus B& \oplus C_{in} \\
+C_{out} = A \cdot B + A \ \cdot& \ C_{in} + B \cdot C_{in}
+\end{align*}
 
 \subsubsection{Multiplexador 4 para 1}
 \paragraph{}
@@ -116,11 +117,11 @@ Y = D_0 \cdot \overline{S_1} \cdot \overline{S_0} + D_1 \cdot \overline{S_1} \cd
 
 \subsubsection{Somador Completo}
 \paragraph{}
-Antes de definir o somador completo (\textit{Full Adder}), vamos definir o meio somador (\textit{Half Adder}). O meio somador é um circuito lógico combinacional que realiza a soma entre um bit $A$ e um bit $B$. O valor máximo da soma de dois bits $A$ e $B$ é quando $A = 1$ e $B = 1$. O resultado dessa soma é $2$, representado como $10$ em binário. Dessa forma, são necessárias duas saídas para o meio somador: uma para o valor da soma na posição em que estamos e uma para o possível valor da próxima posição, que é igual a 1 quando as duas entradas são 1.
+Antes de definir o somador completo (\textit{Full Adder}), vamos definir o meio somador (\textit{Half Adder}). O meio somador é um circuito lógico combinacional que realiza a soma entre um bit $A$ e um bit $B$. O valor máximo da soma de dois bits $A$ e $B$ é quando $A = 1$ e $B = 1$. O resultado dessa soma é $2$, representado como $10$ em binário. Dessa forma, são necessárias duas saídas para o meio somador: uma para o valor da soma na posição em que estamos $S$ e uma para o possível valor da próxima posição $C_{out}$, que é igual a 1 quando as duas entradas são 1.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/Meio Somador.png}
+    \include{half_adder}
     \caption{Representação externa do meio somador}
 \end{figure}
 
@@ -129,17 +130,17 @@ Esse somador, porém, só consegue somar números de um bit. O que fazer, então
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.35\textwidth]{Imagens/SomadorCompleto.png}
+    \include{full_adder_externo}
     \caption{Representação externa do somador completo}
     \label{fig:somador_externa}
 \end{figure}
 
 \paragraph{}
-Note que a representação acima abstrai a lógica que relaciona as saídas do somador às suas entradas. Podemos representar o somador completo pela sua representação interna, que explicita a relação entre entradas e saídas. Essa representação consiste na tradução das equações mostradas na seção ``\textbf{Sobre o Experimento}'' para um esquemático, construído em Logisim.
+Note que a representação acima abstrai a lógica que relaciona as saídas do somador às suas entradas. Podemos representar o somador completo pela sua representação interna, que explicita a relação entre entradas e saídas. Essa representação consiste na tradução das equações mostradas na seção ``\textbf{\hyperref[subsec:sobre_o_experimento]{Sobre o Experimento}}'' para um esquemático, construído em Logisim.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{Imagens/SomadorCompletoInterno.png}
+    \include{full_adder_interno}
     \caption{Representação interna do somador completo}
     \label{fig:somador_interna}
 \end{figure}
@@ -175,15 +176,19 @@ Para realizar a soma de números grandes, basta encasquetarmos somadores complet
 
 \subsubsection{Multiplexador 4 para 1}
 \paragraph{}
-Um multiplexador, também chamado de Mux, é um dispositivo digital que seleciona uma entre várias entradas de dados como saída. Essencialmente, o multiplexador atua como um ``comutador'' controlado por entradas de seleção, determinando qual sinal será encaminhado para a saída. Esse dispositivo é extensivamente usado no projeto de máquinas de estados, pois ele é muito conveniente quando é necessário implementar diferentes lógicas dependendo do estado atual.
+Um multiplexador, também chamado de Mux, é um dispositivo digital que seleciona uma entre várias entradas de dados como saída. Essencialmente, o multiplexador atua como um ``comutador'' controlado por entradas de seleção, determinando qual sinal será encaminhado para a saída.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.35\textwidth]{Imagens/multiplexador.png}
+    \include{mux4x1_externo}
     \caption{Representação externa do multiplexador 4 x 1}
     \label{fig:Mux_externa}
 \end{figure}
 
+\paragraph{}
+Esse sistema é extensivamente usado no projeto de máquinas de estados, pois ele é muito conveniente quando é necessário implementar diferentes lógicas dependendo do estado atual.
+
+\newpage
 \paragraph{}
 Para entender esse dispositivo, podemos separar as entradas entre entradas de dados, que são as entradas de informações a serem selecionadas, e as entradas de seleção, que são utilizadas para escolher qual das entradas de dados será enviada para a saída. O número de entradas de seleção pode ser calculado em função do número de entradas de dados pela função: 
 \[
@@ -196,7 +201,7 @@ Nesse experimento, implementamos, especificamente, um multiplexador 4 para 1, ou
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{Imagens/MultiplexadorInterno.png}
+    \include{mux4x1_interno}
     \caption{Representação interna do multiplexador 4x1}
     \label{fig:Mux_interna}
 \end{figure}
@@ -258,35 +263,33 @@ end architecture behavioral;
 \end{code}
 
 \paragraph{}
-A \textit{entity} no código acima é uma representação equivalente à exposta na \textbf{\autoref{fig:somador_externa}}, enquanto a \textit{architecture} é equivalente à representação exposta na \textbf{\autoref{fig:somador_interna}}.
+A \textit{entity} no código acima é uma representação equivalente àquela apresentada na \textbf{\autoref{fig:somador_externa}}. Ela define a interface do dispositivo para interação com componentes externos, mostrando suas entradas e saídas, sem detalhar a lógica de funcionamento do sistema. Por outro lado, a \textit{architecture} corresponde à representação exibida na \textbf{\autoref{fig:somador_interna}}, a qual expõe a lógica interna de funcionamento do sistema.
+
+\newpage
 
 \subsubsection{Testbench}
 \paragraph{}
-Além do código acima, foi necessário implementar, também em VHDL, um \textit{testbench} para que se pudesse testar o comportamento e a funcionalidade do circuito digital projetado. Com ele, podemos gerar todas as combinações de sinais possíveis e analisar o comportamento do circuito sob cada um desses estímulos. O código para implementar esse \textit{testbench} é o que segue:
+Além do código acima, para que se pudesse testar o comportamento do sistema projetado, foi necessário implementar um \textit{testbench}, que está exposto a seguir:
 
 \begin{code}
 \begin{minted}{VHDL}
 library IEEE;
 use IEEE.std_logic_1164.all;
 
--- A entidade do testbench é vazia pois ele nunca será instanciado
 entity tb_somadorCompleto is
 end tb_somadorCompleto;
 
 architecture testbench of tb_somadorCompleto is
-    -- Declaração do componente "somadorCompleto". Pense num componente como uma classe
     component somadorCompleto is
         port (
             A, B, Cin: in std_logic;
             S, Cout: out std_logic
         );
     end component somadorCompleto;
-    -- Sinais internos do testbench
     signal A_tb: std_logic := '0';
     signal B_tb: std_logic := '0';
     signal Cin_tb: std_logic := '0';
 begin
-    -- Inicialização da instância do componente - como se fosse um objeto
     instancia_somador : component somadorCompleto 
         port map (
             A => A_tb,
@@ -295,7 +298,6 @@ begin
             S => open,
             Cout => open
         );
-    -- Processo para variar as entradas
     estimulos: process
         variable i: integer := 0;
     begin
@@ -425,7 +427,7 @@ Após escrever os códigos, é necessário compilá-los pelo ModelSim para que s
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{Imagens/CompileModelSim.png}
+    \includegraphics[width=0.9125\textwidth]{Imagens/CompileModelSim.png}
     \caption{Compilação de todos os códigos apresentados}
 \end{figure}
 
@@ -435,16 +437,16 @@ Após compilar com sucesso os códigos apresentados, utilizamos o ModelSim para 
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}[colframe=darkgray, colback=white, boxrule=0.5pt, arc=1pt, width=0.95\textwidth, center, boxsep=0pt, left=0pt, right=0pt]
-    \includegraphics[width=1\textwidth]{Imagens/waves.png}
+    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=1pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \includegraphics[width=1\textwidth]{Imagens/wave_full_adder.png}
     \end{tcolorbox}
     \caption{Simulação em forma de onda binária do somador completo}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}[colframe=darkgray, colback=white, boxrule=0.5pt, arc=1pt, width=0.95\textwidth, center, boxsep=0pt, left=0pt, right=0pt]
-    \includegraphics[width=1\textwidth]{Imagens/waves2.png}
+    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=1pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \includegraphics[width=1\textwidth]{Imagens/wave_mux4x1.png}
     \end{tcolorbox}
     \caption{Simulação em forma de onda binária do multiplexador}
 \end{figure}
@@ -459,17 +461,9 @@ Para analisar os resultados obtidos, basta olhar para os valores das ondas das e
 \paragraph{}
  Abaixo, exibimos os \textit{prints} que denotam o comportamento dos sinais de saída $S$ e $C_{out}$ para cada combinação dos sinais de entrada $A$, $B$ e $C_{in}$.
 
-\setlength{\fboxsep}{0pt} % Espaçamento entre a borda e a imagem
 \begin{figure}[H]
     \centering
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb1.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb2.png}} \\
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb3.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb4.png}} \\
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb5.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb6.png}} \\
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb7.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb8.png}}
+    \include{full_adder_estimulos}
     \caption{Todas as combinações possíveis de entradas e as saídas correspondentes do somador completo}
 \end{figure}
 
@@ -483,21 +477,81 @@ Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/S=00/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=00/00.png} \\
-    \includegraphics[width=0.3\textwidth]{Imagens/S=10/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=10/00.png} \\
-    \includegraphics[width=0.3\textwidth]{Imagens/S=01/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=01/00.png}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/S=11/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=11/00.png}
-\caption{Saídas para todas as combinações das entradas de seleção e de dados selecionadas}
+    \setlength{\lineskip}{0pt}
+    \setlength{\baselineskip}{0pt}
+    
+    % Primeira linha
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=00/11.png}
+        \end{tcolorbox}
+    \end{minipage}
+    \hspace{0.1em}
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=00/00.png}
+        \end{tcolorbox}
+    \end{minipage}
+    
+    \vspace{0.25em}
+    
+    % Segunda linha
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=10/11.png}
+        \end{tcolorbox}
+    \end{minipage}
+    \hspace{0.1em}
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=10/00.png}
+        \end{tcolorbox}
+    \end{minipage}
+    
+    \vspace{0.25em}
+    
+    % Terceira linha
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=01/11.png}
+        \end{tcolorbox}
+    \end{minipage}
+    \hspace{0.1em}
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=01/00.png}
+        \end{tcolorbox}
+    \end{minipage}
+    
+    \vspace{0.25em}
+    
+    % Quarta linha
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=11/11.png}
+        \end{tcolorbox}
+    \end{minipage}
+    \hspace{0.1em}
+    \begin{minipage}[t]{0.2675\textwidth}
+        \centering
+        \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+            \includegraphics[width=1\textwidth]{Imagens/S=11/00.png}
+        \end{tcolorbox}
+    \end{minipage}
+    
+    \caption{Saídas para todas as combinações das entradas de seleção e de dados selecionadas}
+    \vspace{-20pt}
 \end{figure}
 
-\noindent Nota-se, em especial, os sinais destacados em cada coluna - sempre o sinal de saída $Y$ e o sinal de entrada selecionado $D_{n}$. É fácil perceber que aquele é igual a este para qualquer combinação das entradas de seleção, ou seja, que a saída é igual ao sinal selecionado, como é, por definição, em um multiplexador.
+\paragraph{}
+Nota-se, em especial, os sinais destacados em cada coluna - sempre o sinal de saída $Y$ e o sinal de entrada selecionado $D_{n}$. É fácil perceber que aquele é igual a este para qualquer combinação das entradas de seleção, ou seja, que a saída é igual ao sinal selecionado, como é, por definição, em um multiplexador.
 
 \section{Conclusão}
 
