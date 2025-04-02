@@ -121,7 +121,7 @@ Antes de definir o somador completo (\textit{Full Adder}), vamos definir o meio 
 
 \begin{figure}[H]
     \centering
-    \include{half_adder}
+    \include{Recursos/Circuitos/half_adder}
     \caption{Representação externa do meio somador}
 \end{figure}
 
@@ -130,7 +130,7 @@ Esse somador, porém, só consegue somar números de um bit. O que fazer, então
 
 \begin{figure}[H]
     \centering
-    \include{full_adder_externo}
+    \include{Recursos/Circuitos/full_adder_externo}
     \caption{Representação externa do somador completo}
     \label{fig:somador_externa}
 \end{figure}
@@ -140,7 +140,7 @@ Note que a representação acima abstrai a lógica que relaciona as saídas do s
 
 \begin{figure}[H]
     \centering
-    \include{full_adder_interno}
+    \include{Recursos/Circuitos/full_adder_interno}
     \caption{Representação interna do somador completo}
     \label{fig:somador_interna}
 \end{figure}
@@ -180,7 +180,7 @@ Um multiplexador, também chamado de Mux, é um dispositivo digital que selecion
 
 \begin{figure}[H]
     \centering
-    \include{mux4x1_externo}
+    \include{Recursos/Circuitos/mux4x1_externo}
     \caption{Representação externa do multiplexador 4 x 1}
     \label{fig:Mux_externa}
 \end{figure}
@@ -201,7 +201,7 @@ Nesse experimento, implementamos, especificamente, um multiplexador 4 para 1, ou
 
 \begin{figure}[H]
     \centering
-    \include{mux4x1_interno}
+    \include{Recursos/Circuitos/mux4x1_interno}
     \caption{Representação interna do multiplexador 4x1}
     \label{fig:Mux_interna}
 \end{figure}
@@ -427,7 +427,7 @@ Após escrever os códigos, é necessário compilá-los pelo ModelSim para que s
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9125\textwidth]{Imagens/CompileModelSim.png}
+    \includegraphics[width=0.9125\textwidth]{Recursos/Imagens/CompileModelSim.png}
     \caption{Compilação de todos os códigos apresentados}
 \end{figure}
 
@@ -437,16 +437,16 @@ Após compilar com sucesso os códigos apresentados, utilizamos o ModelSim para 
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=1pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-    \includegraphics[width=1\textwidth]{Imagens/wave_full_adder.png}
+    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0.75pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \includegraphics[width=1\textwidth]{Recursos/Imagens/wave_full_adder.png}
     \end{tcolorbox}
     \caption{Simulação em forma de onda binária do somador completo}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=1pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-    \includegraphics[width=1\textwidth]{Imagens/wave_mux4x1.png}
+    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0.75pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \includegraphics[width=1\textwidth]{Recursos/Imagens/wave_mux4x1.png}
     \end{tcolorbox}
     \caption{Simulação em forma de onda binária do multiplexador}
 \end{figure}
@@ -463,7 +463,7 @@ Para analisar os resultados obtidos, basta olhar para os valores das ondas das e
 
 \begin{figure}[H]
     \centering
-    \include{full_adder_estimulos}
+    \include{Recursos/full_adder_estimulos}
     \caption{Todas as combinações possíveis de entradas e as saídas correspondentes do somador completo}
 \end{figure}
 
@@ -484,14 +484,14 @@ Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ 
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=00/11.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=00/11.png}
         \end{tcolorbox}
     \end{minipage}
     \hspace{0.1em}
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=00/00.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=00/00.png}
         \end{tcolorbox}
     \end{minipage}
     
@@ -501,14 +501,14 @@ Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ 
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=10/11.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=10/11.png}
         \end{tcolorbox}
     \end{minipage}
     \hspace{0.1em}
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=10/00.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=10/00.png}
         \end{tcolorbox}
     \end{minipage}
     
@@ -518,14 +518,14 @@ Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ 
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=01/11.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=01/11.png}
         \end{tcolorbox}
     \end{minipage}
     \hspace{0.1em}
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=01/00.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=01/00.png}
         \end{tcolorbox}
     \end{minipage}
     
@@ -535,14 +535,14 @@ Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ 
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=11/11.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=11/11.png}
         \end{tcolorbox}
     \end{minipage}
     \hspace{0.1em}
     \begin{minipage}[t]{0.2675\textwidth}
         \centering
         \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0pt, arc=0pt, width=\textwidth, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-            \includegraphics[width=1\textwidth]{Imagens/S=11/00.png}
+            \includegraphics[width=1\textwidth]{Recursos/Imagens/S=11/00.png}
         \end{tcolorbox}
     \end{minipage}
     
