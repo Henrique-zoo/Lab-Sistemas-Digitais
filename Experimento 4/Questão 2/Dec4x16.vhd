@@ -3,32 +3,29 @@ use IEEE.std_logic_1164.all;
 
 entity Dec4x16 is
     port (
-        A : in std_logic_vector(3 downto 0);
-        Y : out std_logic_vector(15 downto 0)
+        A: in std_logic_vector(3 downto 0);
+        Y: out std_logic_vector(15 downto 0)
     );
 end entity Dec4x16;
 
-architecture rtl of Dec4x16 is
-    
+architecture behavioral of Dec4x16 is
 begin
-    
     with A select Y <=
-        "0000000000000001" when "0000",
-        "0000000000000010" when "0001",
-        "0000000000000100" when "0010",
-        "0000000000001000" when "0011",
-        "0000000000010000" when "0100",
-        "0000000000100000" when "0101",
-        "0000000001000000" when "0110",
-        "0000000010000000" when "0111",
-        "0000000100000000" when "1000",
-        "0000001000000000" when "1001",
-        "0000010000000000" when "1010",
-        "0000100000000000" when "1011",
-        "0001000000000000" when "1100",
-        "0010000000000000" when "1101",
-        "0100000000000000" when "1110",
-        "1000000000000000" when "1111",
+        X"0001" when X"0",
+        X"0002" when X"1",
+        X"0004" when X"2",
+        X"0008" when X"3",
+        X"0010" when X"4",
+        X"0020" when X"5",
+        X"0040" when X"6",
+        X"0080" when X"7",
+        X"0100" when X"8",
+        X"0200" when X"9",
+        X"0400" when X"A",
+        X"0800" when X"B",
+        X"1000" when X"C",
+        X"2000" when X"D",
+        X"4000" when X"E",
+        X"8000" when X"F",
         "----------------" when others;
-    
-end architecture rtl;
+end architecture behavioral;

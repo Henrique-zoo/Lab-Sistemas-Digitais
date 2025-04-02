@@ -3,8 +3,8 @@ use IEEE.std_logic_1164.all;
 
 entity questao1 is
     port (
-        A, B, C : in std_logic;
-        X, Y : out std_logic
+        A, B, C: in std_logic;
+        X, Y: out std_logic
     );
 end entity questao1;
 
@@ -16,10 +16,10 @@ architecture structural of questao1 is
             Y: out std_logic
         );
     end component Mux4x1;
-    signal D_tb : std_logic_vector(3 downto 0);
-    signal S_tb : std_logic_vector(1 downto 0);
-    signal D2_tb : std_logic_vector(3 downto 0);
-    signal S2_tb : std_logic_vector(1 downto 0);
+    signal D_tb: std_logic_vector(3 downto 0);
+    signal S_tb: std_logic_vector(1 downto 0);
+    signal D2_tb: std_logic_vector(3 downto 0);
+    signal S2_tb: std_logic_vector(1 downto 0);
 begin
     Mux_1 : component Mux4x1
         port map (
