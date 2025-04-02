@@ -8,37 +8,31 @@ entity questao1 is
     );
 end entity questao1;
 
-architecture main of questao1 is
-    
+architecture structural of questao1 is
     component Mux4x1 is
         port (
-            D : in std_logic_vector(0 to 3);
-            S : in std_logic_vector(0 to 1);
-            Y : out std_logic
+            D: in std_logic_vector(3 downto 0);
+            S: in std_logic_vector(1 downto 0);
+            Y: out std_logic
         );
     end component Mux4x1;
-
-    signal D_tb : std_logic_vector(0 to 3);
-    signal S_tb : std_logic_vector(0 to 1);
-    signal Y_tb : std_logic;
-    signal D2_tb : std_logic_vector(0 to 3);
-    signal S2_tb : std_logic_vector(0 to 1);
-    signal Y2_tb : std_logic;
-
+    signal D_tb : std_logic_vector(3 downto 0);
+    signal S_tb : std_logic_vector(1 downto 0);
+    signal D2_tb : std_logic_vector(3 downto 0);
+    signal S2_tb : std_logic_vector(1 downto 0);
 begin
-    
-    instancia1_Mux4x1 : component Mux4x1
+    Mux_1 : component Mux4x1
         port map (
             D => D_tb,
             S => S_tb,
-            Y => Y_tb
+            Y => X
         );
     
-    instancia2_Mux4x1 : component Mux4x1
+    Mux_2 : component Mux4x1
         port map (
             D => D2_tb,
             S => S2_tb,
-            Y => Y2_tb
+            Y => Y
         );
     
     S_tb <= A & B;
@@ -46,8 +40,4 @@ begin
     
     S2_tb <= A & B;
     D2_tb <= '1' & (not C) & '0' & C;
-    
-    X <= Y_tb;
-    Y <= Y2_tb;
-
-end architecture main;
+end architecture structural;
