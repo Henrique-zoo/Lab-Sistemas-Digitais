@@ -21,8 +21,11 @@
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
 \usepackage{lastpage}
 \usepackage{titlesec} % Para personalizar a formatação das seções
+\usetikzlibrary {circuits.logic.CDH}
 
 \geometry{a4paper, left=2cm, right=2cm, top=3cm, bottom=2cm}
+\setlength{\parindent}{1.25cm}
+
 \definecolor{LightSeaGreen}{rgb}{0.1255, 0.6980, 0.6667}
 \definecolor{cinza}{rgb}{0.498, 0.498, 0.498}
 \definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
@@ -154,8 +157,7 @@ Do Primeiro Teorema de De Morgan obtemos o seguinte resultado:
 \[
 \Rightarrow A \cdot B = \overline{\overline{A} + \overline{B}}.
 \]
-
-\noindent Utilizando a notação da Lógica Proposicional, temos:
+Utilizando a notação da Lógica Proposicional, temos:
 
 \[
 A \land B = \lnot (\lnot A \lor \lnot B),
@@ -164,14 +166,15 @@ ou seja, o AND entre dois bits é o mesmo que o inverso (NOT) do OR entre os inv
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/circ1a.png}
+    \include{Recursos/Circuitos/q1a}
+    \vspace{-30pt}
     \caption{AND implementado apenas com OR e NOT}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{Imagens/exprQ1a.png}
-    \includegraphics[width=0.4\textwidth]{Imagens/tabQ1a.png} \\
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/exprQ1a.png}
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/tabQ1a.png} \\
     \caption{Expressão e tabela-verdade gerados pelo Logisim para o circuito da figura 2}
 \end{figure}
 
@@ -185,25 +188,24 @@ Do Segundo Teorema de De Morgan obtemos o seguinte resultado:
 \[
 \Rightarrow A + B = \overline{\overline{A} \cdot \overline{B}}.
 \]
-
-\noindent Utilizando a notação da Lógica Proposicional, temos:
+Utilizando a notação da Lógica Proposicional, temos:
 
 \[
 A \lor B = \lnot (\lnot A \land \lnot B),
 \]
-
-\noindent isto é, o OR entre dois bits é o mesmo que o inverso do AND entre os inversos dos dois bits. A implementação desse circuito no Logisim é como segue:
+isto é, o OR entre dois bits é o mesmo que o inverso do AND entre os inversos dos dois bits. A implementação desse circuito no Logisim é como segue:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/circ1b.png}
+    \include{Recursos/Circuitos/q1b}
+    \vspace{-30pt}
     \caption{OR implementado apenas com AND e NOT}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{Imagens/exprQ1b.png}
-    \includegraphics[width=0.4\textwidth]{Imagens/tabQ1b.png} \\
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/exprQ1b.png}
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/tabQ1b.png} \\
     \caption{Expressão e tabela-verdade gerados pelo Logisim para o circuito da figura 3}
 \end{figure}
 
@@ -244,14 +246,15 @@ A implementação dessa função é bastante direta: onde na expressão há mult
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Imagens/circ2a.png}
+    \include{Recursos/Circuitos/q2a}
+    \vspace{-30pt}
     \caption{Implementação da função $T$ apenas com AND e OR}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{Imagens/exprQ2a.png}
-    \includegraphics[width=0.4\textwidth]{Imagens/tabQ2a.png} \\
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/exprQ2a.png}
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/tabQ2a.png} \\
     \caption{Expressão e tabela-verdade gerados pelo Logisim para o circuito da figura 5}
 \end{figure}
 
@@ -259,14 +262,15 @@ A implementação dessa função é bastante direta: onde na expressão há mult
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Imagens/circ2b.png}
+    \include{Recursos/Circuitos/q2b}
+    \vspace{-30pt}
     \caption{Implementação da função $S$ apenas com AND e OR}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{Imagens/exprQ2b.png}
-    \includegraphics[width=0.4\textwidth]{Imagens/tabQ2b.png} \\
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/exprQ2b.png}
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/tabQ2b.png} \\
     \caption{Expressão e tabela-verdade gerados pelo Logisim para o circuito da figura 7}
 \end{figure}
 
@@ -288,9 +292,9 @@ O conjunto formado pelos operadores AND, OR e NOT, por exemplo, é completo func
     \begin{tabular}{|>{\centering\arraybackslash}m{0.2\textwidth}|>{\centering\arraybackslash}m{0.6\textwidth}|}
         \hline
         Porta Lógica & Implementação com NAND \\ \hline
-        NOT & \includegraphics[width=0.4\textwidth]{Imagens/NOTcomNAND.png} \\ \hline
-        AND & \includegraphics[width=0.4\textwidth]{Imagens/ANDcomNAND.png} \\ \hline
-        OR & \includegraphics[width=0.4\textwidth]{Imagens/ORcomNAND.png} \\ \hline
+        NOT & \include{Recursos/Circuitos/NOTcomNAND} \\ \hline
+        AND & \include{Recursos/Circuitos/ANDcomNAND} \\ \hline
+        OR & \include{Recursos/Circuitos/ORcomNAND} \\ \hline
     \end{tabular}
     \caption{Prova de que é possível implementar as portas AND, OR e NOT apenas com a porta NAND}
 \end{table}
@@ -312,14 +316,15 @@ ou seja, $T$ é igual ao NAND entre os NANDs de $A$ e $B$, $A$ e $C$, $B$ e $C$.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{Imagens/circ3a.png}
+    \include{Recursos/Circuitos/q3a}
+    \vspace{-30pt}
     \caption{Função $T$ implementada apenas com NANDs}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{Imagens/exprQ3a.png}
-    \includegraphics[width=0.4\textwidth]{Imagens/tabQ3a.png} \\
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/exprQ3a.png}
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/tabQ3a.png} \\
     \caption{Expressão e tabela-verdade gerados pelo Logisim para o circuito da figura 9}
 \end{figure}
 
@@ -334,23 +339,29 @@ ou seja, $S$ é igual ao NAND entre os NANDs de $\overline{A}$, $\overline{B}$ e
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Imagens/circ3b.png}
+    \include{Recursos/Circuitos/q3b}
+    \vspace{-30pt}
     \caption{Função $S$ implementada apenas com NANDs}
+    \vspace{-10pt}
 \end{figure}
 
-Podemos deixar esse circuito um pouco mais bonito tratando as inversoras como caixas-pretas:
+\paragraph{}
+Podemos deixar esse circuito um pouco mais bonito abstraindo a implementação das inversoras com NANDs:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Imagens/circ3b2.png}
+    \include{Recursos/Circuitos/q3b2}
+    \vspace{-30pt}
     \caption{Função $S$ simplificada implementadas com NANDs}
+    \vspace{-10pt}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{Imagens/exprQ3b.png}
-    \includegraphics[width=0.4\textwidth]{Imagens/tabQ3b.png} \\
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/exprQ3b.png}
+    \includegraphics[width=0.4\textwidth]{Recursos/Imagens/tabQ3b.png} \\
     \caption{Expressão e tabela-verdade gerados pelo Logisim para o circuito da figura 11}
+    \vspace{-20pt}
 \end{figure}
 
 \section{Questão 4}
@@ -390,7 +401,8 @@ O circuito que implementa essa função é o que segue:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{Imagens/circ4.png}
+    \include{Recursos/Circuitos/q4}
+    \vspace{-30pt}
     \caption{Implemetação da função $Y$ apenas com NANDs}
 \end{figure}
 
@@ -399,19 +411,20 @@ Novamente, para melhorar a visualização, podemos simplificar a implementação
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{Imagens/circ4_2.png}
+    \include{Recursos/Circuitos/q42}
+    \vspace{-30pt}
     \caption{Implemetação da função $Y$ simplificada}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Imagens/exprQ4.png}
+    \includegraphics[width=0.8\textwidth]{Recursos/Imagens/exprQ4.png}
     \caption{Expressão gerada pelo Logisim para o circuito da figura 14}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{Imagens/tabQ4.png}
+    \includegraphics[width=0.4625\textwidth]{Recursos/Imagens/tabQ4.png}
     \caption{Tabela-verdade gerada pelo Logisim para o circuito da figura 14}
 \end{figure}
 
