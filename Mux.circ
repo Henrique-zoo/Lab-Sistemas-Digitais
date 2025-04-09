@@ -48,87 +48,19 @@
     <a name="circuit" val="main"/>
     <a name="clabelfont" val="SansSerif plain 12"/>
     <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(100,130)" name="Splitter">
-      <a name="appear" val="center"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <comp lib="0" loc="(100,140)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="S"/>
-      <a name="width" val="2"/>
-    </comp>
-    <comp lib="0" loc="(110,100)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="south"/>
-      <a name="label" val="B"/>
-    </comp>
-    <comp lib="0" loc="(150,100)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="south"/>
-      <a name="label" val="C"/>
-    </comp>
-    <comp lib="0" loc="(210,100)" name="Power"/>
-    <comp lib="0" loc="(230,580)" name="Ground"/>
-    <comp lib="0" loc="(290,310)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="S"/>
-      <a name="width" val="2"/>
-    </comp>
-    <comp lib="0" loc="(290,570)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="S"/>
-      <a name="width" val="2"/>
-    </comp>
-    <comp lib="0" loc="(400,200)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="X"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(400,460)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Y"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(80,100)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="south"/>
-      <a name="label" val="A"/>
-    </comp>
-    <comp lib="1" loc="(170,210)" name="NOT Gate">
-      <a name="facing" val="south"/>
-      <a name="size" val="20"/>
-    </comp>
-    <comp loc="(330,200)" name="Mux4x1"/>
-    <comp loc="(330,460)" name="Mux4x1"/>
-    <wire from="(100,110)" to="(110,110)"/>
-    <wire from="(100,130)" to="(100,140)"/>
-    <wire from="(110,100)" to="(110,110)"/>
-    <wire from="(150,100)" to="(150,180)"/>
-    <wire from="(150,180)" to="(150,520)"/>
-    <wire from="(150,180)" to="(170,180)"/>
-    <wire from="(150,520)" to="(250,520)"/>
-    <wire from="(170,180)" to="(170,190)"/>
-    <wire from="(170,180)" to="(250,180)"/>
-    <wire from="(170,210)" to="(170,220)"/>
-    <wire from="(170,220)" to="(170,440)"/>
-    <wire from="(170,220)" to="(250,220)"/>
-    <wire from="(170,440)" to="(250,440)"/>
-    <wire from="(210,100)" to="(210,260)"/>
-    <wire from="(210,260)" to="(210,400)"/>
-    <wire from="(210,260)" to="(250,260)"/>
-    <wire from="(210,400)" to="(250,400)"/>
-    <wire from="(230,140)" to="(230,480)"/>
-    <wire from="(230,140)" to="(250,140)"/>
-    <wire from="(230,480)" to="(230,580)"/>
-    <wire from="(230,480)" to="(250,480)"/>
-    <wire from="(290,270)" to="(290,310)"/>
-    <wire from="(290,530)" to="(290,570)"/>
-    <wire from="(330,200)" to="(400,200)"/>
-    <wire from="(330,460)" to="(400,460)"/>
-    <wire from="(80,100)" to="(80,110)"/>
-    <wire from="(80,110)" to="(90,110)"/>
+    <comp loc="(410,180)" name="Mux8x1"/>
+    <wire from="(300,110)" to="(330,110)"/>
+    <wire from="(300,130)" to="(330,130)"/>
+    <wire from="(300,150)" to="(330,150)"/>
+    <wire from="(300,170)" to="(330,170)"/>
+    <wire from="(300,190)" to="(330,190)"/>
+    <wire from="(300,210)" to="(330,210)"/>
+    <wire from="(300,230)" to="(330,230)"/>
+    <wire from="(300,250)" to="(330,250)"/>
+    <wire from="(350,260)" to="(350,280)"/>
+    <wire from="(370,250)" to="(370,280)"/>
+    <wire from="(390,240)" to="(390,280)"/>
+    <wire from="(410,180)" to="(430,180)"/>
   </circuit>
   <circuit name="Mux4x1">
     <a name="appearance" val="custom"/>
@@ -136,9 +68,9 @@
     <a name="clabelfont" val="SansSerif plain 12"/>
     <a name="simulationFrequency" val="1.0"/>
     <appear>
-      <text dominant-baseline="central" font-family="CMU Sans Serif" font-size="14" font-weight="bold" text-anchor="middle" x="537" y="222">Y</text>
+      <text dominant-baseline="central" font-family="Dialog" font-size="14" font-weight="bold" text-anchor="middle" x="537" y="222">Y</text>
       <polygon fill="none" points="470,130 470,311 550,270 550,171" stroke="#000000" stroke-width="5"/>
-      <text dominant-baseline="central" font-family="CMU Sans Serif" font-size="16" font-weight="bold" text-anchor="middle" x="483" y="161">0</text>
+      <text dominant-baseline="central" font-family="Dialog" font-size="16" font-weight="bold" text-anchor="middle" x="483" y="161">0</text>
       <text dominant-baseline="central" font-family="Ubuntu" font-size="16" font-weight="bold" text-anchor="middle" x="510" y="277">S</text>
       <circ-anchor facing="east" x="550" y="220"/>
       <circ-port dir="in" pin="130,190" x="470" y="160"/>

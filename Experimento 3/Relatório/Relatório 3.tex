@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
 \usepackage{amsmath}
+\usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{animate}
 \usepackage[font=footnotesize, labelfont=bf, listformat=empty]{caption}
@@ -22,7 +23,7 @@
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
 
 % Configurações de margens e espaçamento
-\geometry{a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm}
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2cm}
 \setlength{\parindent}{1.25cm}
 \onehalfspacing
 
@@ -43,6 +44,7 @@
 
 % Configurações do minted para VHDL
 \setminted[VHDL]{
+    fontsize=\footnotesize,
     style=vs,
     linenos=true,
     breaklines=true,
@@ -68,15 +70,28 @@
 % Novo Comando para chamar a capa
 \newcommand{\capa}{
     \begin{titlepage}
+        \begin{multicols}{2}
+            \begin{flushleft}
+                \includegraphics[width=0.45\linewidth]{Recursos/Imagens/UnB_logo.png}
+            \end{flushleft}
+            \columnbreak
+            \begin{flushright}
+                Universidade de Brasília \\
+                Faculdade de Tecnologia \\
+                Departamento de Engenharia Elétrica
+            \end{flushright}
+        \end{multicols}
         \begin{center}
-            {\large \textbf{ENE0040 - Laboratório de Sistemas Digitais - Turma 07}} \\
-            \vspace{3cm}
+        \vspace{-20pt}
+        \rule{\textwidth}{0.4pt}
+        \end{center}
+        \vspace{0.6cm}
+        \begin{center}
             {\Huge \textbf{Relatório do Experimento 3}} \\[1em]
             {\large \textbf{Autor:} Henrique Morcelles Salum} \\[0.5em]
             {\large \textbf{Matrícula:} 232003008} \\
             \vfill
-            {\Large \textbf{Universidade de Brasília - UnB}} \\[0.75em]
-            {\large \textbf{Departamento de Engenharia Elétrica - ENE}} \\
+            {\large \textbf{ENE0040 - Laboratório de Sistemas Digitais - Turma 07}} \\
         \end{center}
     \end{titlepage}
 }
@@ -128,7 +143,7 @@ Na primeira tarefa, devemos escrever, utilizando atribuições condicionais \tex
 
 \subsubsection{Decodificador 4 para 16}
 \paragraph{}
-Na segunda tarefa, a entidade que devemos implementar em VHDL, utilizando atribuições seletivas \textit{with-select}, é um decodificador 4 para 16. Ele tem um vetor de entrada $A$, de quatro bits, e um vetor de saída $Y$ de 16 bits. A tabela-verdade é a que segue:
+Na segunda tarefa, a entidade que devemos implementar em VHDL, utilizando atribuições seletivas \textit{with-select}, é um decodificador 4 para 16. Ele tem um vetor de entrada $A$, de quatro bits, e um vetor de saída $Y$, de 16 bits. A tabela-verdade é a que segue:
 
 \begin{table}[H]
     \centering
@@ -165,13 +180,13 @@ Na segunda tarefa, a entidade que devemos implementar em VHDL, utilizando atribu
         \rowcolor{cinza}
         1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & $8000h$ \\ \hline
     \end{tabular}
-    \caption{Tabela-verdade do Decodificador 4 para 16}
+    \caption{Tabela-verdade do Decodificador 4 para 16} \label{tab:dec4x16}
     \label{tab:dec4x16}
     \vspace{-20pt}
 \end{table}
 
 \paragraph{}
-Note que, na \autoref{tab:dec4x16}, há uma coluna para a representação em hexadecimal da saída. Quando lidamos com representações binárias muito grandes, é conveniente utilizar essa representação pois, se um número em sua representação binária tem $n$ casas, em sua representação hexadecimal ele terá $log_2 n$. Além disso, a conversão de binário para hexadecimal é muito fácil: cada algarismo da representação hexadecimal é substituído pela sua representação binária - que tem quatro bits, já que o algarismo hexadecimal de maior valor é o $F_{16}$, que tem valor $15_{10} = 1111_{2}$ - e pronto! Representações hexadecimais serão utilizadas nos códigos em VHDL nesse experimento.
+Note que, na \autoref{tab:dec4x16}, há uma coluna para a representação em hexadecimal da saída. Quando lidamos com representações binárias muito grandes, é conveniente utilizar essa representação pois, se um número em sua representação binária tem $n$ casas, em sua representação hexadecimal ele terá $log_2 n$. Além disso, a conversão de binário para hexadecimal é muito fácil: cada algarismo da representação hexadecimal é substituído pela sua representação binária - que tem quatro bits, já que o algarismo hexadecimal de maior valor é o $F_{16}$, que tem valor $15_{10} = 1111_{2}$ - e pronto! Representações hexadecimais serão utilizadas nos códigos em VHDL neste experimento.
 
 \subsection{Introdução Teórica}
 
@@ -190,7 +205,7 @@ Nesse experimento, implementamos, especificamente, um multiplexador 8 para 1, ou
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.25\textwidth]{Imagens/multiplexador.png}
+    \include{Recursos/Circuitos/mux8x1}
     \caption{Representação externa do multiplexador 8 x 1}
     \label{fig:Mux_externa}
 \end{figure}
@@ -201,7 +216,7 @@ O decodificador, chamado de Dec, é um circuito combinatório com $n$ bits de en
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.25\linewidth]{Imagens/Decodificador.png}
+    \include{Recursos/Circuitos/dec4x16}
     \caption{Representação externa do decodificador 4 x 16}
     \label{fig:dec4x16}
 \end{figure}
@@ -218,7 +233,7 @@ Podemos implementar $f(w, x, y, z)$ da seguinte forma:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{Imagens/ExemploDec.png}
+    \include{Recursos/Circuitos/dec4x16_ex}
     \label{fig:enter-label}
 \end{figure}
 
@@ -229,9 +244,9 @@ Nessa seção, serão apresentados os códigos desenvolvidos, em VHDL, para impl
 
 \subsection{Multiplexador 8 para 1}
 
-\subsubsection{Arquivo de Design VHDL}
+\subsubsection{Descrição de Hardware}
 \paragraph{}
-O código escrito para implementar \textit{design} do Mux 8x1, utilizando atribuições condicionais \textit{when-else} é o que segue:
+O código escrito para implementar o modelo de \textit{hardware} do Mux 8x1, utilizando atribuições condicionais \textit{when-else} está exibido abaixo.
 
 \begin{code}
 \begin{minted}{VHDL}
@@ -313,18 +328,16 @@ begin
 end architecture main;
 \end{minted}
 \caption{Testbench do multiplexador 8 para 1}
+\label{cod:testbench_mux}
 \end{code}
 
 \paragraph{}
 No código acima, o multiplexador construído é instanciado e utilizado como uma ``caixa-preta''; associamos às suas entradas sinais do \textit{testbench}, o que é equivalente a conectar cabos nas entradas de um dispositivo digital, e, dentro do \textit{process}, fazemos esses sinais oscilarem. Dessa forma, conseguimos testar o dispositivo criado.
 
 \subsection{Decodificador 4 para 16}
+\subsubsection{Descrição de \textit{Hardware}}
 \paragraph{}
-Como pôde ser visto, nos códigos relativos ao somador completo, a abordagem foi bastante de baixo nível: não utilizamos abstrações fornecidas pela linguagem VHDL, a função foi implementada diretamente pela equação correspondente e o \textit{testbench} gerou todas as oito possíveis combinações das três entradas. A abordagem para o multiplexador foi diferente, como será observado nos códigos subsequentes.
-
-\subsubsection{Arquivo de Design VHDL}
-\paragraph{}
-O código desenvolvido em VHDL para implementar a ``caixa-preta'' do multiplexador 4 para 1 é o que segue:
+O código, em VHDL, que descreve o circuito do decodificador 4 para 16, utilizando atribuição seletiva \textit{with-select}, é o que segue:
 
 \begin{code}
 \begin{minted}[escapeinside=||]{VHDL}
@@ -360,18 +373,17 @@ begin
         "----------------" when others;
 end architecture behavioral;
 \end{minted}
-\caption{Código para implementação do multiplexador 4x1}
+\vspace{-20pt}
+\caption{Código para implementação do decodificador 4x16}
+\vspace{-10pt}
 \end{code}
 
 \paragraph{}
-Aqui, ao invés de implementar a função pela equação correspondente, foi utilizada uma construção de controle de fluxo `when', em que apenas se definiu o comportamento do circuito para as combinações das entradas de seleção, além de se ter considerado apenas alguns valores - 0 e 1 - para elas, fazendo com que as outras possibilidades - X, Z, H, ... - gerassem saída \textit{don't care} (-). O \textit{testbench} do multiplexador é o que segue.
-
-\paragraph{}
-Analogamente ao Somador Completo, no multiplexador 4 para 1, a entidade (\textit{entity}) é equivalente à representação da \autoref{fig:Mux_externa} e a arquitetura (\textit{architecture}), à da \autoref{fig:Mux_interna}.
+Nesse código, utilizamos o VHDL em alto nível, com a abstração \textit{with-select}. Além disso, representamos os vetores de bits por hexadecimais, precedidos por `X' no VHDL.
 
 \subsubsection{Testbench}
 \paragraph{}
-O código referente ao \textit{testbench} do multiplexador é o que segue:
+Assim como com o multiplexador, precisamos fazer um \textit{testbench} para o decodificador para testarmos o dispositivo implementado. O código desse \textit{testbench} está exibido a seguir.
 
 \begin{code}
 \begin{minted}{VHDL}
@@ -383,13 +395,15 @@ entity tb_Dec4x16 is
 end entity tb_Dec4x16;
 
 architecture testbench of tb_Dec4x16 is
+
     component Dec4x16 is
         port (
             A: in std_logic_vector(3 downto 0);
             Y: out std_logic_vector(15 downto 0)
         );
     end component Dec4x16;
-    signal A_tb: std_logic_vector(3 downto 0) := (others => '0'); -- Sinal interno do testbench
+    
+    signal A_tb: std_logic_vector(3 downto 0) := (others => '0');
 begin
     instancia_Dec4x16: component Dec4x16
         port map (
@@ -406,11 +420,11 @@ begin
     end process estimulos;
 end architecture testbench;
 \end{minted}
-\caption{Testbench para o multiplexador 4x1}
+\caption{Testbench para o decodificador 4x16}
 \end{code}
 
 \paragraph{}
-Ao contrário do \textit{testbench} anterior, aqui não são geradas todas as combinações possíveis dos sinais de entrada. Isso se deve à natureza do multiplexador: nele, é irrelevante a variação dos sinais não selecionados em um momento da simulação. Portanto, basta que geremos todas as combinações das entradas de seleção e se verifique se o sinal de saída corresponde à entrada de dados que deve ser selecionada por essa combinação. Para que essa simulação seja mais completa, fez-se com que os sinais de dados selecionados em um momento da simulação oscilassem entre 0 e 1.
+No código acima, diferente do Código \autoref{cod:testbench_mux}, em que geramos apenas algumas combinações de interesse, geramos todas as combinações possíveis das entradas. Isso se deve à natureza do decodificador: diferente do multiplexador, todas as combinações possíveis das entradas são de interesse, pois todas interferem na saída a qualquer momento.
 
 % Compilação
 \section{Compilação}
@@ -419,28 +433,30 @@ Após escrever os códigos, é necessário compilá-los pelo ModelSim para que s
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{Imagens/CompileModelSim.png}
+    \includegraphics[width=1\textwidth]{Recursos/Imagens/CompileModelSim.png}
     \caption{Compilação de todos os códigos apresentados}
 \end{figure}
 
+\newpage
+
 \section{Simulação}
 \paragraph{}
-Após compilar com sucesso os códigos apresentados, utilizamos o ModelSim para simular o comportamento dos sistemas descritos por eles. Lá, utilizamos a aba ``Waves'' para analisar o comportamento dos sinais de saída para cada combinação de valores dos sinais de entrada. A forma como as entradas variam segue o que definimos nos \textit{testbenches}, então note que as ondas referentes ao Mux 4x1 não representam todas as combinações das seis entradas. Seguem as imagens das simulações no ModelSim dos sistemas projetados.
+Após compilar com sucesso os códigos apresentados, utilizamos o ModelSim para simular o comportamento dos sistemas descritos por eles. Lá, utilizamos a aba ``Waves'' para analisar o comportamento dos sinais de saída para cada combinação de valores dos sinais de entrada. A forma como as entradas variam segue o que definimos nos \textit{testbenches}, então note que as ondas referentes ao Mux 8x1 não representam todas as combinações das seis entradas. Seguem as imagens das simulações no ModelSim dos sistemas projetados.
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}[colframe=darkgray, colback=white, boxrule=0.5pt, arc=1pt, width=0.95\textwidth, center, boxsep=0pt, left=0pt, right=0pt]
-    \includegraphics[width=1\textwidth]{Imagens/waves.png}
+    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0.75pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \includegraphics[width=1\textwidth]{Recursos/Imagens/wave_mux8x1.png}
     \end{tcolorbox}
-    \caption{Simulação em forma de onda binária do somador completo}
+    \caption{Simulação em forma de onda binária do multiplexador 8 para 1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \begin{tcolorbox}[colframe=darkgray, colback=white, boxrule=0.5pt, arc=1pt, width=0.95\textwidth, center, boxsep=0pt, left=0pt, right=0pt]
-    \includegraphics[width=1\textwidth]{Imagens/waves2.png}
+    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0.75pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \includegraphics[width=1\textwidth]{Recursos/Imagens/wave_dec4x16.png}
     \end{tcolorbox}
-    \caption{Simulação em forma de onda binária do multiplexador}
+    \caption{Simulação em forma de onda binária do decodificador 4 para 16}
 \end{figure}
 
 % Análise
@@ -449,56 +465,57 @@ Após compilar com sucesso os códigos apresentados, utilizamos o ModelSim para 
 \paragraph{}
 Para analisar os resultados obtidos, basta olhar para os valores das ondas das entradas e saídas entre cada mudança dos sinais de entrada. Os cursores estão posicionados de forma que, ao selecionar cada um deles, vemos todas as possíveis combinações das entradas e saídas correspondentes na aba à esquerda da tela.
 
-\subsection{Análise do comportamento do Somador Completo}
+\subsection{Análise do comportamento do Multiplexador 8 para 1}
 \paragraph{}
- Abaixo, exibimos os \textit{prints} que denotam o comportamento dos sinais de saída $S$ e $C_{out}$ para cada combinação dos sinais de entrada $A$, $B$ e $C_{in}$.
+ Abaixo, exibimos os \textit{prints} que denotam o comportamento do sinal de saída $Y$ para cada combinação da entrada de seleção $S$ e selecionada $D_n$.
 
 \setlength{\fboxsep}{0pt} % Espaçamento entre a borda e a imagem
 \begin{figure}[H]
     \centering
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb1.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb2.png}} \\
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb3.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb4.png}} \\
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb5.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb6.png}} \\
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb7.png}}
-    \fcolorbox{cinza}{white}{\includegraphics[width=0.3\textwidth]{Imagens/comb8.png}}
-    \caption{Todas as combinações possíveis de entradas e as saídas correspondentes do Somador Completo}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/011.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/000.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/111.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/100.png}} \\
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/211.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/200.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/311.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/300.png}} \\
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/411.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/400.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/511.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/500.png}} \\
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/611.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/600.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/711.png}}
+    \fcolorbox{cinza}{white}{\includegraphics[width=0.21\textwidth]{Recursos/Imagens/700.png}}
+    \caption{Combinações de entradas de seleção e saídas correspondentes do multiplexador 8 para 1}
+    \vspace{-10pt}
 \end{figure}
 
 \paragraph{}
-Percebe-se que o comportamento está de acordo com o esperado: a concatenação das saídas $C_{out}$ e $S$ corresponde à soma dos bits de entrada $A$, $B$ e $C_{in}$.
+Percebe-se que o comportamento está de acordo com o esperado: quando a entrada de seleção seleciona a entrada de dados $D_n$, $Y=D_n$.
 
-\subsection{Análise do comportamento do Multiplexador 4 para 1}
+\subsection{Análise do comportamento do Decodificador 4 para 16}
 
 \paragraph{}
-Para analisar os resultados da simulação do Mux 4x1, observou-se a saída $Y$ para cada combinação da entrada de seleção. Abaixo, estão exibidos os \textit{prints} que mostram o comportamento do circuito simulado pelo ModelSim para cada uma dessas combinações. Perceba que cada linha representa uma combinação das entradas de seleção e, portanto, uma entrada de dados selecionada, enquanto cada coluna representa um possível valor do sinal de entrada de dados selecionado.
+Exibimos abaixo os \textit{prints} da seção à esquerda da aba waves do ModelSim para cada combinação possível da entrada.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/S=00/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=00/00.png} \\
-    \includegraphics[width=0.3\textwidth]{Imagens/S=10/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=10/00.png} \\
-    \includegraphics[width=0.3\textwidth]{Imagens/S=01/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=01/00.png}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\textwidth]{Imagens/S=11/11.png}
-    \includegraphics[width=0.3\textwidth]{Imagens/S=11/00.png}
-\caption{Saídas para todas as combinações das entradas de seleção e de dados selecionadas}
+    \include{Recursos/dec4x16}
+    \caption{Todas as combinações de entradas e as saídas correspondentes do decodificador 4 para 16}
+    \vspace{-15pt}
 \end{figure}
 
-\noindent Nota-se, em especial, os sinais destacados em cada coluna - sempre o sinal de saída $Y$ e o sinal de entrada selecionado $D_{n}$. É fácil perceber que aquele é igual a este para qualquer combinação das entradas de seleção, ou seja, que a saída é igual ao sinal selecionado, como é, por definição, em um multiplexador.
+\paragraph{}
+Novamente, percebe-se que o comportamento está de acordo com o esperado. Cada um dos \textit{prints} acima representa uma linha da tabela-verdade do decodificador 4 para 16 e, analisando-os, percebemos que a saída está de acordo com o exibido na \autoref{tab:dec4x16}.
 
 \section{Conclusão}
 
 \paragraph{}
-Nesse experimento, simulou-se, com sucesso, dois dispositivos digitais de suma importância para a eletrônica digital: o Somador Completo e o multiplexador 4 para 1. No relatório, percebeu-se o sucesso do experimento e pôde-se analisar devidamente os resultados obtidos pelas simulações, por meio das quais foi possível analisar minuciosamente esses dois circuitos e o seu comportamento para cada estímulo possível.
+Nesse experimento, simulou-se dois dispositivos digitais de suma importância para a eletrônica digital: o Multiplexador 8 para 1 e o decodificador 4 para 16.
 
 \paragraph{}
-Concluindo, não foram observadas discrepâncias entre o comportamento esperado e o observado, podendo-se concluir, portanto, o sucesso do experimento.
+Pelo relatório, concluímos o sucesso do experimento ao analisarmos devidamente os resultados obtidos pelas simulações: notamos que o comportamento dos sistemas explorados foi exatamente o esperado para todo possível estímulo, isto é, não foram observadas discrepâncias entre o comportamento esperado e o observado.
 
 \end{document}

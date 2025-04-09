@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{animate}
+\usepackage{multicol}
 \usepackage{float}
 \usepackage[table]{xcolor} % Para colorir as linhas da tabela
 \usepackage{array} % Para melhorar a formatação de tabelas
@@ -67,15 +68,28 @@
 % Novo Comando para chamar a capa
 \newcommand{\capa}{
     \begin{titlepage}
+        \begin{multicols}{2}
+            \begin{flushleft}
+                \includegraphics[width=0.45\linewidth]{Recursos/Imagens/UnB_logo.png}
+            \end{flushleft}
+            \columnbreak
+            \begin{flushright}
+                Universidade de Brasília \\
+                Faculdade de Tecnologia \\
+                Departamento de Engenharia Elétrica
+            \end{flushright}
+        \end{multicols}
         \begin{center}
-            {\large \textbf{ENE0040 - Laboratório de Sistemas Digitais - Turma 07}} \\
-            \vspace{3cm}
+        \vspace{-20pt}
+        \rule{\textwidth}{0.4pt}
+        \end{center}
+        \vspace{0.6cm}
+        \begin{center}
             {\Huge \textbf{Relatório do Experimento 2}} \\[1em]
             {\large \textbf{Autor:} Henrique Morcelles Salum} \\[0.5em]
             {\large \textbf{Matrícula:} 232003008} \\
             \vfill
-            {\Large \textbf{Universidade de Brasília - UnB}} \\[0.75em]
-            {\large \textbf{Departamento de Engenharia Elétrica - ENE}} \\
+            {\large \textbf{ENE0040 - Laboratório de Sistemas Digitais - Turma 07}} \\
         \end{center}
     \end{titlepage}
 }

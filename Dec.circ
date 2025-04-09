@@ -48,18 +48,46 @@
     <a name="circuit" val="main"/>
     <a name="clabelfont" val="SansSerif plain 12"/>
     <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(240,130)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="label" val="w"/>
+    </comp>
+    <comp lib="0" loc="(240,180)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="label" val="x"/>
+    </comp>
+    <comp lib="0" loc="(240,230)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="label" val="y"/>
+    </comp>
+    <comp lib="0" loc="(240,280)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="label" val="z"/>
+    </comp>
+    <comp lib="0" loc="(550,150)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="1" loc="(520,150)" name="OR Gate">
+      <a name="inputs" val="5"/>
+    </comp>
+    <comp lib="6" loc="(559,132)" name="Text">
+      <a name="font" val="SansSerif plain 12"/>
+      <a name="text" val="f(w,x,y,z)"/>
+    </comp>
     <comp loc="(360,130)" name="Dec_4x16_a8c844dc"/>
     <wire from="(240,130)" to="(260,130)"/>
     <wire from="(240,180)" to="(260,180)"/>
     <wire from="(240,230)" to="(260,230)"/>
     <wire from="(240,280)" to="(260,280)"/>
-    <wire from="(360,130)" to="(380,130)"/>
-    <wire from="(360,140)" to="(380,140)"/>
+    <wire from="(360,130)" to="(470,130)"/>
+    <wire from="(360,140)" to="(470,140)"/>
     <wire from="(360,150)" to="(380,150)"/>
     <wire from="(360,160)" to="(380,160)"/>
-    <wire from="(360,170)" to="(380,170)"/>
-    <wire from="(360,180)" to="(380,180)"/>
-    <wire from="(360,190)" to="(380,190)"/>
+    <wire from="(360,170)" to="(420,170)"/>
+    <wire from="(360,180)" to="(430,180)"/>
+    <wire from="(360,190)" to="(440,190)"/>
     <wire from="(360,200)" to="(380,200)"/>
     <wire from="(360,210)" to="(380,210)"/>
     <wire from="(360,220)" to="(380,220)"/>
@@ -69,6 +97,13 @@
     <wire from="(360,260)" to="(380,260)"/>
     <wire from="(360,270)" to="(380,270)"/>
     <wire from="(360,280)" to="(380,280)"/>
+    <wire from="(420,150)" to="(420,170)"/>
+    <wire from="(420,150)" to="(470,150)"/>
+    <wire from="(430,160)" to="(430,180)"/>
+    <wire from="(430,160)" to="(470,160)"/>
+    <wire from="(440,170)" to="(440,190)"/>
+    <wire from="(440,170)" to="(470,170)"/>
+    <wire from="(520,150)" to="(550,150)"/>
   </circuit>
   <circuit name="Dec_4x16_a8c844dc">
     <a name="appearance" val="custom"/>
@@ -77,11 +112,11 @@
     <a name="simulationFrequency" val="1.0"/>
     <appear>
       <rect fill="none" height="170" stroke="#000000" stroke-width="5" width="100" x="50" y="50"/>
-      <text dominant-baseline="central" font-family="SansSerif" font-size="12" font-weight="bold" text-anchor="middle" x="139" y="65">0</text>
-      <text dominant-baseline="central" font-family="SansSerif" font-size="14" font-weight="bold" text-anchor="middle" x="67" y="166">A₁</text>
-      <text dominant-baseline="central" font-family="SansSerif" font-size="14" font-weight="bold" text-anchor="middle" x="67" y="215">A₀</text>
-      <text dominant-baseline="central" font-family="SansSerif" font-size="14" font-weight="bold" text-anchor="middle" x="67" y="115">A₂</text>
-      <text dominant-baseline="central" font-family="SansSerif" font-size="14" font-weight="bold" text-anchor="middle" x="67" y="66">A₃</text>
+      <text dominant-baseline="central" font-family="Lexend" font-size="14" font-weight="bold" text-anchor="middle" x="138" y="60">0</text>
+      <text dominant-baseline="central" font-family="Lexend" font-size="14" font-weight="bold" text-anchor="middle" x="66" y="160">A₁</text>
+      <text dominant-baseline="central" font-family="Lexend" font-size="14" font-weight="bold" text-anchor="middle" x="67" y="209">A₀</text>
+      <text dominant-baseline="central" font-family="Lexend" font-size="14" font-weight="bold" text-anchor="middle" x="66" y="110">A₂</text>
+      <text dominant-baseline="central" font-family="Lexend" font-size="14" font-weight="bold" text-anchor="middle" x="66" y="60">A₃</text>
       <circ-anchor facing="east" x="150" y="60"/>
       <circ-port dir="in" pin="120,80" x="50" y="110"/>
       <circ-port dir="in" pin="160,80" x="50" y="160"/>

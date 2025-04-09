@@ -2,3 +2,4 @@ output/
 *.aux
 *.synctex.gz
 *.data.minted
+*.autosave

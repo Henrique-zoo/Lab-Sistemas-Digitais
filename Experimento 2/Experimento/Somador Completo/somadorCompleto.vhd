@@ -22,7 +22,7 @@ entity somadorCompleto is
         A, B, Cin: in std_logic; -- Entradas
         S, Cout: out std_logic -- Saídas
     );
-end somadorCompleto;
+end entity somadorCompleto;
 
 -- Criação da arquitetura, que estabelece a lógica entre as entradas e saídas
 architecture behavioral of somadorCompleto is
