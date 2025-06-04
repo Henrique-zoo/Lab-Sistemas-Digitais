@@ -1,10 +1,10 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity TopModel is
-end entity TopModel;
+entity TopModule is
+end entity TopModule;
 
-architecture structural of TopModel is
+architecture structural of TopModule is
 
     component tb_SomadorNibble is
         port (
@@ -50,12 +50,11 @@ begin
             S => S_arith
         );
 
-    comparacao: process
+    comparacao: process (A_tb, B_tb)
     begin
         if S /= S_arith then
-            report "Diferente!";
+            report "Diferente! S = " & to_string(S) & ", S_arith = " & to_string(S_arith);
         end if;
-        wait on A_tb, B_tb;
     end process comparacao;
 
 end architecture structural;

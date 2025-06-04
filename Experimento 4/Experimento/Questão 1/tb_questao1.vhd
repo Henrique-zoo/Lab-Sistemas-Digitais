@@ -13,7 +13,7 @@ architecture testbench of tb_questao1 is
 begin
     estimulos: process
     begin
-        wait for 7 ns;
+        wait for 12.5 ns;
         X <= std_logic_vector(unsigned(X) + 1);
     end process estimulos;
     A <= X(2);

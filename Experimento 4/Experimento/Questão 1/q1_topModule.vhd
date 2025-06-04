@@ -1,10 +1,10 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity topModule is
-end entity topModule;
+entity q1_topModule is
+end entity q1_topModule;
 
-architecture structural of topModule is
+architecture structural of q1_topModule is
     component questao1 is
         port (
             A, B, C: in std_logic;

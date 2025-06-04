@@ -16,37 +16,37 @@ architecture structural of SomadorNibble is
         );
     end component SomadorCompleto;
 
-    signal Cout_0, Cout_1, Cout_2: std_logic;
+    signal s_carry0, s_carry1, s_carry2: std_logic;
 begin
-    somador_1: component SomadorCompleto
+    somador0: component SomadorCompleto
         port map (
             A => A(0),
             B => B(0),
             Cin => '0',
             S => S(0),
-            Cout => Cout_0
+            Cout => s_carry0
         );
-    somador_2: component SomadorCompleto
+    somador1: component SomadorCompleto
         port map (
             A => A(1),
             B => B(1),
-            Cin => Cout_0,
+            Cin => s_carry0,
             S => S(1),
-            Cout => Cout_1
+            Cout => s_carry1
         );
-    somador_3: component SomadorCompleto
+    somador2: component SomadorCompleto
         port map (
             A => A(2),
             B => B(2),
-            Cin => Cout_1,
+            Cin => s_carry1,
             S => S(2),
-            Cout => Cout_2
+            Cout => s_carry2
         );
-    somador_4: component SomadorCompleto
+    somador3: component SomadorCompleto
         port map (
             A => A(3),
             B => B(3),
-            Cin => Cout_2,
+            Cin => s_carry2,
             S => S(3),
             Cout => S(4)
         );

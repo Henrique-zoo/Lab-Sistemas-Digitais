@@ -51,16 +51,35 @@ int main() {
         int op;
         cout << "Escolha o que voce quer fazer:\n";
         cout << "1. Converter decimal para binario\n";
-        cout << "2. Ver quais linhas da tabela-verdade um termo binario liga\n";
+        cout << "1. Converter um vetor de decimais em um vetor de binarios\n";
+        cout << "3. Ver quais linhas da tabela-verdade um termo binario liga\n";
         cin >> op;
         switch (op) {
         case 1: {
             int n;
             cin >> n;
-            cout << converte(n) << endl;
+            string s = converte(n);
+            s.insert(s.begin(), 7 - s.length(), '0');
+            cout << s << endl;
             break;
         }
         case 2: {
+            int m;
+            vector<string> binarios;
+            cout << "Quantos decimais? ";
+            cin >> m;
+            for (int i = 0; i < m; i++) {
+                int n;
+                cin >> n;
+                string s = converte(n);
+                s.insert(s.begin(), 7 - s.length(), '0');
+                binarios.push_back(s);
+            }
+            for (string binario : binarios)
+                cout << binario << " | ";
+            break;
+        }
+        case 3: {
             string binario;
             cin >> binario;
             descobreMinTermos(binario);

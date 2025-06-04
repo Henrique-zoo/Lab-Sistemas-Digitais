@@ -24,25 +24,34 @@ architecture structural of questao2 is
         );
     end component Mux8x1;
 
-    signal A_tb: std_logic_vector(3 downto 0);
-    signal Y_tb: std_logic_vector(15 downto 0);
-    signal D_tb: std_logic_vector(7 downto 0);
-    signal S_tb: std_logic_vector(2 downto 0);
-    signal Y2_tb: std_logic;
+    signal decoder_input   : std_logic_vector(3 downto 0);
+    signal decoder_output  : std_logic_vector(15 downto 0);
+    signal mux_data_input  : std_logic_vector(7 downto 0);
+    signal mux_select      : std_logic_vector(2 downto 0);
+    signal mux_output      : std_logic;
+    
 begin
     instancia_Dec4x16: component Dec4x16
         port map (
-            A => A_tb,
-            Y => Y_tb
+            A => decoder_input,
+            Y => decoder_output
         );
+        
     instancia_Mux8x1: component Mux8x1
         port map (
-            D => D_tb,
-            S => S_tb,
-            Y => Y2_tb
+            D => mux_data_input,
+            S => mux_select,
+            Y => mux_output
         );
-    A_Tb <= A & B & C & D;
-    D_tb <= '1' & (Y_tb(10) or Y_tb(11)) & '0' & (Y_tb(9) or Y_tb(15)) & '1' & Y_tb(7) & (Y_tb(0) or Y_tb(15)) & '0';
-    S_tb <= E & F & G;
-    S <= Y2_tb;
+    
+    decoder_input <= A & B & C & D;
+
+    mux_data_input <= 
+    '1' & (decoder_output(10) or
+    decoder_output(11)) & '0' & (decoder_output(9) or
+    decoder_output(15)) & '1' & decoder_output(7) & (decoder_output(0) or
+    decoder_output(15)) & '0';
+
+    mux_select <= E & F & G;
+    S <= mux_output;
 end architecture structural;
