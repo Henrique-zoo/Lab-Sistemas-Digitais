@@ -13,18 +13,18 @@ entity FlipFlopJK is
 end entity FlipFlopJK;
 
 architecture behavioral of FlipFlopJK is
-    signal Q_internal: std_logic;
+    signal Q_in: std_logic;
 begin
     process(preset, clear, clock)
     begin
         if preset = '1' then
-            Q_internal <= '1';
+            Q_in <= '1';
         elsif clear = '1' then
-            Q_internal <= '0';
+            Q_in <= '0';
         elsif rising_edge(clock) then
-            Q_internal <= (not J and not K and Q_internal) or (J and not K) or (J and K and not Q_internal);
+            Q_in <= (not J and not K and Q_in) or (J and not K) or (J and K and not Q_in);
         end if;
     end process;
 
-    Q <= Q_internal;
+    Q <= Q_in;
 end architecture behavioral;

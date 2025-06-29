@@ -41,27 +41,24 @@ architecture structural of Registrador4Bits is
     signal J_signals, K_signals: std_logic_vector(3 downto 0);
 
 begin
-
-    process(clock)
+    OP_ctrl: process(load, direction)
     begin
-        if rising_edge(clock) then
-            if load = '1' then
-                OP <= "11"; -- Load
-            elsif direction = '1' then
-                OP <= "01"; -- Shift Right
-            elsif direction = '0' then
-                OP <= "10"; -- Shift Left
-            else
-                OP <= "00"; -- Hold
-            end if;
-        end if; 
+        if load = '1' then
+            OP <= "11"; -- Load
+        elsif direction = '1' then
+            OP <= "01"; -- Shift Right
+        elsif direction = '0' then
+            OP <= "10"; -- Shift Left
+        else
+            OP <= "00";
+        end if;
     end process;
-        
+
     mux_input <=
-    data(3) & FF_output(2) & right & FF_output(3) -- Mux4
-    & data(2) & FF_output(1) & FF_output(3) & FF_output(2) -- Mux3
-    & data(1) & FF_output(0) & FF_output(2) & FF_output(1) -- Mux2
-    & data(0) & FF_output(0) & left & FF_output(1); -- Mux1
+        data(3) & FF_output(2) & right & FF_output(3) -- Mux4
+        & data(2) & FF_output(1) & FF_output(3) & FF_output(2)-- Mux3
+        & data(1) & FF_output(0) & FF_output(2) & FF_output(1)-- Mux2
+        & data(0) & left & FF_output(1) & FF_output(0); -- Mux1
 
     Mux1: Mux4x1 port map (D => mux_input(3 downto 0), S => OP, Y => mux_output(0));
     Mux2: Mux4x1 port map (D => mux_input(7 downto 4), S => OP, Y => mux_output(1));
