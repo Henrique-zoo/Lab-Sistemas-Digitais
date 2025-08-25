@@ -1,0 +1,504 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{float}
+\usepackage[table]{xcolor} % Para colorir as linhas da tabela
+\usepackage{array} % Para melhorar a formatação de tabelas
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{animate}
+\usepackage{tabularx}
+\usepackage[font=footnotesize, labelfont=bf, listformat=empty]{caption}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{lastpage}
+\usepackage{subcaption}
+\usepackage[skins,xparse,breakable]{tcolorbox}
+\usepackage{longtable}
+\usepackage{minted}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+
+% Configurações de margens e espaçamento
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2cm}
+\onehalfspacing
+
+% Configurações de títulos
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\itshape}{\thesubsubsection}{1em}{}
+
+% Configurações de listagens
+\renewcommand{\listingscaption}{Código}
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+% Configurações de cores
+\definecolor{LightSeaGreen}{rgb}{0.1255, 0.6980, 0.6667}
+\definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
+\definecolor{cinza}{RGB}{160, 160, 160}
+\definecolor{cinza_claro}{RGB}{240, 240, 240} % Cinza claro
+
+% Configurações do minted para VHDL
+\setminted[VHDL]{
+    fontsize=\footnotesize,
+    style=emacs,
+    linenos=true,
+    breaklines=true,
+    mathescape=true,
+    bgcolor=cinza_claro,
+    breakanywhere=true,
+}
+
+\newcommand{\hex}[1]{\textcolor{green!50!black}{#1}}
+
+% Configurações de cabeçalho e rodapé
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize{Laboratório de Sistemas Digitais - ENE0040}}
+\fancyhead[R]{\footnotesize{2025/1 - Turma 07}}
+\fancyfoot[R]{\footnotesize{Página \hspace{0.05cm} \thepage \hspace{0.05cm} de \pageref{LastPage}}}
+\fancyfoot[L]{\footnotesize{Relatório do Experimento 6}}
+
+% Adiciona uma linha preta acima do rodapé
+\renewcommand{\footrulewidth}{0.4pt} % Espessura da linha
+\renewcommand{\footrule}{\vbox to 0pt{\hrule width \textwidth height \footrulewidth \vss}} % Desenha a linha
+
+% Novo Comando para chamar a capa
+\newcommand{\capa}{
+    \begin{titlepage}
+        \begin{multicols}{2}
+            \begin{flushleft}
+                \includegraphics[width=0.45\linewidth]{Recursos/Imagens/UnB_logo.png}
+            \end{flushleft}
+            \columnbreak
+            \begin{flushright}
+                Universidade de Brasília \\
+                Faculdade de Tecnologia \\
+                Departamento de Engenharia Elétrica
+            \end{flushright}
+        \end{multicols}
+        \begin{center}
+        \vspace{-20pt}
+        \rule{\textwidth}{0.4pt}
+        \end{center}
+        \vspace{0.6cm}
+        \begin{center}
+            {\Huge \textbf{Relatório do Experimento 6}} \\[1em]
+            {\large \textbf{Autor:} Henrique Morcelles Salum} \\[0.5em]
+            {\large \textbf{Matrícula:} 232003008} \\
+            \vfill
+            {\large \textbf{ENE0040 - Laboratório de Sistemas Digitais - Turma 07}} \\
+        \end{center}
+    \end{titlepage}
+}
+
+\begin{document}
+
+\capa
+
+% Sumário
+\newpage
+\tableofcontents
+\newpage
+
+% Introdução
+\section{Introdução}
+
+\subsection{Sobre o Experimento}
+Este experimento é composto por duas tarefas; em ambas, deve-se escrever códigos em VHDL que implementem sistemas digitais e simulá-los no \textit{software} ModelSim, da Intel.
+
+\subsubsection{Flip-Flop JK}
+Na primeira tarefa, devemos utilizar a estrutura ``process'' para implementar um flip-flop JK gatilhado pela borda de subida. A tabela-verdade desse sistema está apresentada a seguir:
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        \rowcolor{black}
+        \multicolumn{5}{|c|}{\textbf{\textcolor{white}{Entradas}}} & \multicolumn{1}{|c|}{\textbf{\textcolor{white}{Saída}}} \\ \hline
+        \rowcolor{black}
+        \textcolor{white}{\textbf{PR}} & \textcolor{white}{\textbf{CLR}} & \textcolor{white}{\textbf{CLK}} & \textcolor{white}{\textbf{J}} & \textcolor{white}{\textbf{K}} & \textcolor{white}{\textbf{Q}} \\ \hline
+        1 & $\mathsf{X}$ & $\mathsf{X}$ & $\mathsf{X}$ & $\mathsf{X}$ & 1 \\ \hline
+        \rowcolor{cinza}
+        0 & 1 & $\mathsf{X}$ & $\mathsf{X}$ & $\mathsf{X}$ & 0 \\ \hline
+        0 & 0 & \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 0 & 0 & $LastQ$ \\ \hline
+        \rowcolor{cinza}
+        0 & 0 & \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 0 & 1 & 0 \\ \hline
+        0 & 0 & \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 1 & 0 & 1 \\ \hline
+        \rowcolor{cinza}
+        0 & 0 & \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 1 & 1 & $\overline{LastQ}$\\ \hline
+        0 & 0 & outros & $\mathsf{X}$ & $\mathsf{X}$ & $LastQ$\\ \hline
+    \end{tabular}
+    \caption{Tabela-verdade do flip-flop JK}
+    \label{tab: q1_1}
+\end{table}
+
+\subsubsection{Registrador de Deslocamento}
+A segunda tarefa consiste em implementar, novamente por meio da estrutura ``process'', um registrador de deslocamento bidirecional gatilhado pela borda de subida e dotado das entradas \textbf{RST} (\textit{reset}) e \textbf{LOAD}. Esse sistema é descrito pela tabela-verdade a seguir.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        \rowcolor{black}
+        \multicolumn{7}{|c|}{\textbf{\textcolor{white}{Entradas}}} & \textbf{\textcolor{white}{Saída}} \\ \hline
+        \rowcolor{black}
+        \textcolor{white}{\textbf{CLK}} & \textcolor{white}{\textbf{RST}} & \textcolor{white}{\textbf{LOAD}} & \textcolor{white}{\textbf{D}} & \textcolor{white}{\textbf{DIR}} & \textcolor{white}{\textbf{L}} & \textcolor{white}{\textbf{R}} & \textcolor{white}{\textbf{Q}} \\ \hline
+        \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 1 & $\mathsf{X}$ & $\mathsf{X} \mathsf{X}  \mathsf{X}  \mathsf{X} $ & $\mathsf{X}$ & $\mathsf{X}$ & $\mathsf{X}$ & 0000 \\ \hline
+        \rowcolor{cinza}
+        \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 0 & 1 & $D_3D_2D_1D_0$ & $\mathsf{X}$ & $\mathsf{X}$ & $\mathsf{X}$ & $D_3D_2D_1D_0$ \\ \hline
+        \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 0 & 0 & $\mathsf{X} \mathsf{X}  \mathsf{X}  \mathsf{X} $ & 0 & 0 & $\mathsf{X}$ & $Q_2Q_1Q_0$0 \\ \hline
+        \rowcolor{cinza}
+        \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 0 & 0 & $\mathsf{X} \mathsf{X}  \mathsf{X}  \mathsf{X} $ & 0 & 1 & $\mathsf{X}$ & $Q_2Q_1Q_0$1 \\ \hline
+        \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 0 & 0 & $\mathsf{X} \mathsf{X}  \mathsf{X}  \mathsf{X} $ & 1 & $\mathsf{X}$ & 0 & $0Q_3Q_2Q_1$ \\ \hline
+        \rowcolor{cinza}
+        \includegraphics[width=0.02\linewidth]{Recursos/Imagens/subida_clock.png} & 0 & 0 & $\mathsf{X} \mathsf{X}  \mathsf{X}  \mathsf{X} $ & 1 & $\mathsf{X}$ & 1 & $1Q_3Q_2Q_1$ \\ \hline
+        outros & $\mathsf{X}$ & $\mathsf{X}$ & $\mathsf{X} \mathsf{X}  \mathsf{X}  \mathsf{X} $ & $\mathsf{X}$ & $\mathsf{X}$ & $\mathsf{X}$ & $Q_3Q_2Q_1Q_0$ \\ \hline
+    \end{tabular}
+    \caption{Tabela-verdade do registrador de deslocamento}
+    \label{tab:shift_register}
+    \vspace{-5pt}
+\end{table}
+
+Para implementar esse registrador, além do código do flip-flop, que será apresentado doravante, foram utilizados multiplexadores 4x1. Isso não seria necessário de acordo com o roteiro, foi uma decisão minha (avalizada pelo professor) implementar o registrador em mais baixo nível (com uma arquitetura estrutural), o que exigiu o uso do multiplexador.
+
+\subsection{Introdução Teórica}
+
+\subsubsection{Flip-flops e Circuitos Sequenciais}
+Os \textbf{flip-flops} são circuitos digitais fundamentais na eletrônica digital, responsáveis por armazenar informações binárias. Diferentemente das portas lógicas combinacionais, cuja saída depende unicamente das entradas atuais, os flip-flops fazem parte dos chamados circuitos sequenciais, nos quais a saída depende não apenas das entradas atuais, mas também do \textit{estado anterior} do sistema. Essa característica os torna essenciais na implementação de memórias, registradores, contadores, máquinas de estados finitos e diversos sistemas digitais temporizados.
+
+\begin{figure}[H]
+    \centering
+    \include{Recursos/LaTeX/flip-flopJK}
+    \caption{Flip-flop JK}
+    \label{fig:enter-label}
+\end{figure}
+Um flip-flop é capaz de armazenar um único bit de informação e muda de estado geralmente em função de um sinal de controle denominado \textbf{clock} (CLK). As transições ocorrem, nas bordas de subida (ou descida) desse sinal de clock, o que sincroniza a operação de múltiplos flip-flops em um sistema.
+
+O comportamento do flip-flop JK, objeto desse experimento, está descrito na \autoref{tab: q1_1}. A operação da penúltima linha dessa tabela — de \textit{toggle} ou comutação — torna o flip-flop JK particularmente útil na construção de contadores binários, nos quais o estado se alterna a cada pulso de clock. Além disso, o comportamento bem definido para todos os pares de entradas diferencia o flip-flop JK do flip-flop RS, que apresenta uma condição inválida quando ambas as entradas são 1.
+
+\subsubsection{Registradores}
+Na eletrônica digital, um registrador é um circuito sequencial síncrono composto por um conjunto de flip-flops, geralmente do tipo D ou JK, que armazena um grupo de bits simultaneamente. Cada flip-flop representa uma posição de armazenamento de um bit, e, juntos, formam uma unidade capaz de armazenar palavras binárias de múltiplos bits. Os registradores são componentes essenciais em microprocessadores, microcontroladores e em diversas arquiteturas digitais, pois atuam como memória de curto prazo e mecanismos de transferência de dados.
+
+Um tipo especial de registrador é o registrador de deslocamento (\textit{shift register}). Ele permite que os dados armazenados sejam deslocados, bit a bit, para a esquerda ou para a direita, em cada pulso de clock. Essa funcionalidade é útil para diversas aplicações. Tipicamente, processadores são dotados desses dispositivos; na programação em assembly, eles são diretamente manipulados pelo programador e, em linguagens de alto nível, a sua manipulação é abstraída por meio de variáveis.
+
+\begin{figure}[H]
+    \centering
+    \include{Recursos/LaTeX/Registrador}
+    \caption{Representação interna do registrador de deslocamento de 4 bits}
+    \label{fig:enter-label}
+\end{figure}
+
+\section{Códigos} \label{sec: codigos}
+
+\subsection{Flip-Flop JK}
+O código utilizado para implementar o flip-flop seguiu uma arquitetura de alto nível (\textit{behavioral}). O código é bastante simples: as entradas assíncronas foram implementadas por um \textit{if-elsif-else} e as síncronas por uma expressão avaliada na última cláusula desse \textit{if}.
+
+\begin{code}
+    \begin{minted}[fontsize=\scriptsize]{VHDL}
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity FlipFlopJK is
+    port (
+        preset:     in std_logic;
+        clear:      in std_logic;
+        clock:      in std_logic;
+        J:          in std_logic;
+        K:          in std_logic;
+        Q:          out std_logic
+    );
+end entity FlipFlopJK;
+architecture behavioral of FlipFlopJK is
+    signal Q_in: std_logic;
+begin
+    process(preset, clear, clock)
+    begin
+        if preset = '1' then
+            Q_in <= '1';
+        elsif clear = '1' then
+            Q_in <= '0';
+        elsif rising_edge(clock) then
+            Q_in <= (not J and not K and Q_in) or (J and not K) or (J and K and not Q_in);
+        end if;
+    end process;
+    Q <= Q_in;
+end architecture behavioral;
+    \end{minted}
+    \caption{Descrição de Hardware do flip-flop JK}
+\end{code}
+
+Não foi necessário \textit{testbench} ou \textit{top-module}. Ao invés disso, o registrador serviu para testar o correto funcionamento do flip-flop.
+
+\newpage
+
+\subsection{Registrador de Deslocamento}
+O código referente ao registrador, ao contrário do referente ao flip-flop, é de baixo nível (\textit{structural}). Utilizamos multiplexadores para tomar as decisões referentes às entradas de ``controle'' (que decidem qual será a operação realizada pelo registrador) e instanciamos os flip-flops para armazenar os dados.
+
+\subsubsection{Descrição de \textit{Hardware}}
+\begin{code}
+    \begin{minted}[fontsize=\scriptsize]{VHDL}
+entity Registrador4Bits is
+    port (
+        clock:    in std_logic;
+        reset:    in std_logic;
+        load:   in std_logic;
+        data:      in std_logic_vector(3 downto 0);
+        direction:    in std_logic;
+        left:      in std_logic;
+        right:      in std_logic;
+        Q:      out std_logic_vector(3 downto 0)
+    );
+end entity Registrador4Bits;
+
+architecture structural of Registrador4Bits is
+    component FlipFlopJK is
+        port (
+            preset:     in std_logic;
+            clear:      in std_logic;
+            clock:      in std_logic;
+            J:          in std_logic;
+            K:          in std_logic;
+            Q:          out std_logic
+        );
+    end component FlipFlopJK;
+    component Mux4x1 is
+        port (
+            D: in std_logic_vector(3 downto 0);
+            S: in std_logic_vector(1 downto 0);
+            Y: out std_logic
+        );
+    end component Mux4x1;
+    signal OP: std_logic_vector(1 downto 0) := (others => '0');
+    signal FF_output: std_logic_vector(3 downto 0);
+    signal mux_input: std_logic_vector(15 downto 0);
+    signal mux_output: std_logic_vector(3 downto 0);
+    signal J_signals, K_signals: std_logic_vector(3 downto 0);
+begin
+    OP_ctrl: process(load, direction)
+    begin
+        if load = '1' then OP <= "11"; -- Load
+        elsif direction = '1' then OP <= "01"; -- Shift Right
+        elsif direction = '0' then OP <= "10"; -- Shift Left
+        else OP <= "00"; -- Hold
+        end if;
+    end process;
+    mux_input <=
+        data(3) & FF_output(2) & right & FF_output(3) -- Mux4
+        & data(2) & FF_output(1) & FF_output(3) & FF_output(2)-- Mux3
+        & data(1) & FF_output(0) & FF_output(2) & FF_output(1)-- Mux2
+        & data(0) & left & FF_output(1) & FF_output(0); -- Mux1
+    Mux1: Mux4x1 port map (D => mux_input(3 downto 0), S => OP, Y => mux_output(0));
+    Mux2: Mux4x1 port map (D => mux_input(7 downto 4), S => OP, Y => mux_output(1));
+    Mux3: Mux4x1 port map (D => mux_input(11 downto 8), S => OP, Y => mux_output(2));
+    Mux4: Mux4x1 port map (D => mux_input(15 downto 12), S => OP, Y => mux_output(3));
+    J_signals <= mux_output;
+    K_signals <= not mux_output;
+
+    FF_JK_1: component FlipFlopJK
+        port map (
+            preset => '0',
+            clear => reset,
+            clock => clock,
+            J => J_signals(0),
+            K => K_signals(0),
+            Q => FF_output(0)
+        );
+
+    FF_JK_2: component FlipFlopJK
+        port map (
+            preset => '0',
+            clear => reset,
+            clock => clock,
+            J => J_signals(1),
+            K => K_signals(1),
+            Q => FF_output(1)
+        );
+
+    FF_JK_3: component FlipFlopJK
+        port map (
+            preset => '0',
+            clear => reset,
+            clock => clock,
+            J => J_signals(2),
+            K => K_signals(2),
+            Q => FF_output(2)
+        );
+
+    FF_JK_4: component FlipFlopJK
+        port map (
+            preset => '0',
+            clear => reset,
+            clock => clock,
+            J => J_signals(3),
+            K => K_signals(3),
+            Q => FF_output(3)
+        );
+
+    Q <= FF_output;
+end architecture structural;
+    \end{minted}
+    \caption{Descrição de Hardware do registrador de deslocamento de 4 bits}
+\end{code}
+
+\subsubsection{\textit{Testbench}}
+\begin{code}
+    \begin{minted}[fontsize=\scriptsize]{VHDL}
+entity tb_Registrador4Bits is
+    port (
+        clock:       in std_logic;
+        reset:       out std_logic := '0';
+        load:        out std_logic := '1';
+        data:        out std_logic_vector(3 downto 0) := "1011";
+        direction:   out std_logic := '0';
+        left:        out std_logic := '-';
+        right:       out std_logic := '-'
+    );
+end entity tb_Registrador4Bits;
+
+architecture test of tb_Registrador4Bits is
+begin
+    load_and_reset: process
+    begin
+        wait for 4 ns;
+        reset <= '1';
+        wait for 20 ns;
+        reset <= '0';
+        wait for 25 ns;
+        load <= '0';
+        left <= '0';
+        wait for  30 ns;
+        direction <= '1';
+        right <= '0';
+        wait;
+    end process;
+end architecture;
+
+    \end{minted}
+    \caption{Testbench do registrador}
+\end{code}
+
+\subsubsection{\textit{Top-Module}}
+A presença do \textit{process} referente ao \textit{clock} nesse código pode parecer uma mistura das responsabilidades, mas a decisão tomada foi utilizar o \textit{testbench} como um simulacro do resto do circuito, gerando variações nas entradas ``normais'', e sincronizar esse simulacro com o dispositivo testado diretamente no \textit{top module}. Basicamente, tratamos o \textit{clock} como algo independente do circuito.
+
+\begin{code}
+    \begin{minted}[fontsize=\scriptsize]{VHDL}
+entity TopModule is
+end entity;
+
+architecture structural of TopModule is
+    component Registrador4Bits is
+        port (
+            clock:    in std_logic;
+            reset:    in std_logic;
+            load:   in std_logic;
+            data:      in std_logic_vector(3 downto 0);
+            direction:    in std_logic;
+            left:      in std_logic;
+            right:      in std_logic;
+            Q:      out std_logic_vector(3 downto 0)
+        );
+    end component;
+
+    component tb_Registrador4Bits is
+        port (
+            clock:       in std_logic;
+            reset:       out std_logic;
+            load:        out std_logic;
+            data:        out std_logic_vector(3 downto 0);
+            direction:   out std_logic;
+            left:        out std_logic;
+            right:       out std_logic
+        );
+    end component;
+
+    signal clock_top:     std_logic := '0';
+    signal reset_top:     std_logic;
+    signal load_top:      std_logic;
+    signal data_top:      std_logic_vector(3 downto 0);
+    signal direction_top: std_logic;
+    signal left_top:      std_logic;
+    signal right_top:     std_logic;
+    constant clock_period: time := 20 ns;
+begin
+    DUT: Registrador4Bits
+        port map (
+            clock => clock_top,
+            reset => reset_top,
+            load => load_top,
+            data => data_top,
+            direction => direction_top,
+            left => left_top,
+            right => right_top,
+            Q => open
+        );
+    TB: tb_Registrador4Bits
+        port map (
+            clock => clock_top,
+            reset => reset_top,
+            load => load_top,
+            data => data_top,
+            direction => direction_top,
+            left => left_top,
+            right => right_top
+        );
+
+    clock_process: process
+    begin
+        wait for 0.1 ns;
+        while true loop
+            clock_top <= not clock_top;
+            wait for clock_period / 2;
+        end loop;
+    end process;
+end architecture;
+    \end{minted}
+    \caption{Testbench do registrador}
+\end{code}
+
+\section{Compilação}
+Após escrever os códigos, é necessário compilá-los pelo ModelSim para que se possa simular os sistemas digitais discutidos. Caso a compilação tenha sucesso, sabemos que não houve erros nos códigos apresentados, mas ainda não podemos afirmar que a lógica para implementar os circuitos está correta; isso será analisado nas próximas seções.
+
+A seguir, está a mensagem de compilação dos códigos apresentados acima. Sem nenhum erro, como pode ser visto no terminal no canto inferior da figura.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Recursos/Imagens/CompileModelSim.png}
+    \caption{Compilação de todos os códigos apresentados}
+\end{figure}
+
+\section{Simulação}
+O gráfico de forma de onda gerado pelo ModelSim ao simular o \textit{top-module} está exibido abaixo. Foram marcados com cursores os momentos de interesse para a análise.
+
+\begin{figure}[H]
+    \centering
+    \begin{tcolorbox}[colframe=cinza, colback=white, boxrule=0.75pt, arc=0pt, width=1\textwidth, center, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \includegraphics[width=1\textwidth]{Recursos/Imagens/waves.png}
+    \end{tcolorbox}
+    \caption{Simulação em forma de onda binária do registrador}
+    \label{fig: ondas}
+\end{figure}
+
+\section{Análise}
+Na onda apresentada na \autoref{fig: ondas}, estão marcados os momentos cruciais do teste. Esses instantes são: 
+\begin{enumerate}
+    \item 4 ns - \textit{reset} assíncrono;
+    \item 20 ns - tentativa de \textit{load} (não ocorre pois o \textit{reset} segue em 1);
+    \item 40 ns - \textit{load};
+    \item 60 ns - \textit{shift left} (entra o 0 na direita);
+    \item 80 ns - \textit{shift right} (entra o 0 na esquerda).
+\end{enumerate}
+Analisando a saída $Q$, percebe-se que todas as instruções funcionam de acordo com o esperado. Podemos concluir, portanto, que a implementação apresentada está correta.
+
+\section{Conclusão}
+Neste experimento, tivemos o primeiro contato com flip-flops e, portanto, com circuitos sequenciais. Esses dispositivos são cruciais no projeto de máquinas de estados, além de serem base para o desenvolvimento de dispositivos mais complexos, como registradores, contadores, microprocessadores, etc.
+
+Além disso, instanciando os flip-flops JK, desenvolvemos um registrador de deslocamento de 4 bits, dispositivo que é usado em máquinas de estados mais complexas e é essencial para a arquitetura de processadores digitais.
+
+Em suma, chegamos a uma etapa essencial do estudo de sistemas digitais: começamos a entender o funcionamento em baixo nível dos dispositivos que se tornaram base para o desenvolvimento do mundo digital. É com base nisso que foram desenvolvidos os processadores digitais e, posteriormente, as linguagens de programação, sistemas operacionais, etc.
+\end{document}

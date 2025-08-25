@@ -79,8 +79,10 @@ begin
             R           => R
         );
 
-    process(CLK)
+    process
     begin
+        wait for 1 ns;
         reset <= '0';
+        wait;
     end process;
 end architecture structural;
