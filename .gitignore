@@ -3,3 +3,4 @@ output/
 *.synctex.gz
 *.data.minted
 *.autosave
+.vscode
